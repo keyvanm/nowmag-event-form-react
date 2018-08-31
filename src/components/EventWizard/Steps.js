@@ -18,7 +18,7 @@ function getStepStatus(index, currentStep) {
 }
 
 
-const Steps =  ({ stepsArray, currentStep }) => {
+const Steps =  ({ stepsArray, currentStep, ...props }) => {
   const augmentedStepsArray = stepsArray.map( (stepObject, index) => {
     const status = getStepStatus(index, currentStep);
     return {
@@ -27,7 +27,7 @@ const Steps =  ({ stepsArray, currentStep }) => {
       onClick: () => { alert() }
     }
   });
-  return <Step.Group ordered items={augmentedStepsArray} />
+  return <Step.Group items={augmentedStepsArray} {...props} />
 }
 
 export default Steps;

@@ -33,7 +33,9 @@ export class EventWizard extends Component {
   render() {
     return (
       <div>
-        <Steps currentStep={this.state.currentStep} stepsArray={stepsArray} />
+        <Steps
+          currentStep={this.state.currentStep} stepsArray={stepsArray}
+          ordered attached='top' widths={stepsArray.length} />
       </div>
     );
   }
