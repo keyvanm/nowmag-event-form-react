@@ -1,29 +1,8 @@
 import React, { Component } from 'react';
 
 import Steps from './Steps';
+import { stepsArray } from '../../consts/steps';
 
-const stepsArray = [
-  {
-    key: 'info',
-    title: 'Event Info',
-  },
-  {
-    key: 'location',
-    title: 'Location',
-  },
-  {
-    key: 'datetime',
-    title: 'Date and Time',
-  },
-  {
-    key: 'eventContant',
-    title: 'Event Contact',
-  },
-  {
-    key: 'submitterContact',
-    title: 'Submitter Contact',
-  },
-]
 
 export class EventWizard extends Component {
   state = {
