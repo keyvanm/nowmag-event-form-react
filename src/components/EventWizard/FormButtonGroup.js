@@ -17,6 +17,7 @@ export default class FormButtonGroup extends Component {
 
   render () {
     const {
+      loading,
       buttonAbility: { back, next, submit },
       buttonHandlers: { handleBack, handleNext }
     } = this.props;
@@ -28,11 +29,11 @@ export default class FormButtonGroup extends Component {
         </div>
         <div className="right-form-button-group">
           {
-            back && <Button onClick={handleBack}>Back</Button>
+            back && <Button loading={loading} disabled={loading} onClick={handleBack}>Back</Button>
           }
-          <Button disabled={!next} onClick={handleNext} primary>Next</Button>
+          <Button loading={loading} disabled={loading || !next} onClick={handleNext} primary>Next</Button>
 
-          <Button disabled={!submit} positive type='submit'>Submit</Button>
+          <Button loading={loading} disabled={loading || !submit} positive type='submit'>Submit</Button>
         </div>
 
         <Confirm

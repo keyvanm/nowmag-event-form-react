@@ -5,8 +5,7 @@ import FormButtonGroup from './FormButtonGroup';
 
 
 const FormExampleForm = ({
-  currentStep,
-  lastStep,
+  currentStep, lastStep, loading,
   buttonHandlers
 }) => {
   const buttonAbility = {
@@ -36,7 +35,7 @@ const FormExampleForm = ({
         <Checkbox label='I agree to the Terms and Conditions' />
       </Form.Field>
 
-      <FormButtonGroup buttonAbility={buttonAbility} buttonHandlers={buttonHandlers} />
+      <FormButtonGroup loading={loading} buttonAbility={buttonAbility} buttonHandlers={buttonHandlers} />
 
     </Form>
   )

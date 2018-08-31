@@ -8,7 +8,8 @@ import EventForm from './EventForm';
 export class EventWizard extends Component {
   state = {
     currentStep: 1,
-    lastStep: 5
+    lastStep: 5,
+    loading: false
   }
 
   handleNext = (e) => {
@@ -40,15 +41,16 @@ export class EventWizard extends Component {
       this.handleNext(e)
       return
     }
-    alert("Handling submit")
+    this.setState({ loading: true });
+    setTimeout(() => this.setState({ loading: false }), 2000)
   }
 
 
   render() {
-    const { currentStep, lastStep } = this.state;
+    const { currentStep, lastStep, loading } = this.state;
     const { handleNext, handleBack, handleReset, handleSubmit } = this;
     const eventFormProps = {
-      currentStep, lastStep,
+      currentStep, lastStep, loading,
       buttonHandlers: { handleNext, handleBack, handleReset, handleSubmit }
     }
 
