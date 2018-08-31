@@ -1,7 +1,14 @@
 import React from 'react'
-import { Button, Checkbox, Form } from 'semantic-ui-react'
+import { Button, Checkbox, Form, Container } from 'semantic-ui-react'
 
-const FormExampleForm = ({ currentStep, handleSubmit }) => (
+const FormExampleForm = ({
+  currentStep,
+  lastStep,
+  handleCancel,
+  handleBack,
+  handleNext,
+  handleSubmit
+}) => (
   <Form onSubmit={handleSubmit}>
     <Form.Field>
       <label>First Name</label>
@@ -14,7 +21,14 @@ const FormExampleForm = ({ currentStep, handleSubmit }) => (
     <Form.Field>
       <Checkbox label='I agree to the Terms and Conditions' />
     </Form.Field>
-    <Button type='submit'>Submit</Button>
+
+    <div class="form-button-group">
+      <Button disabled negative>Cancel</Button>
+      <Button>Back</Button>
+      <Button primary type='submit'>Next</Button>
+      <Button disabled positive type='submit'>Submit</Button>
+    </div>
+
   </Form>
 )
 
