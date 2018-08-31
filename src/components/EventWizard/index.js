@@ -11,36 +11,45 @@ export class EventWizard extends Component {
     lastStep: 5
   }
 
-  handleNext = () => {
+  handleNext = (e) => {
+    e.preventDefault();
     let { currentStep, lastStep } = this.state;
     if (currentStep < lastStep) {
       currentStep++;
       this.setState({ currentStep });
     }
   }
-  handleBack = () => {
+  handleBack = (e) => {
+    e.preventDefault();
     let { currentStep } = this.state;
     if (currentStep > 1) {
       currentStep--;
       this.setState({ currentStep });
     }
   }
-  handleCancel = () => {
-    let { currentStep } = this.state;
-    if (currentStep > 1) {
-      // TODO: Flush data
-      currentStep = 1;
-      this.setState({ currentStep });
+  handleReset = (e) => {
+    e.preventDefault();
+    // TODO: Flush data
+    this.setState({ currentStep: 1 });
+  }
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    let { currentStep, lastStep } = this.state;
+    if (currentStep < lastStep) {
+      this.handleNext(e)
+      return
     }
+    alert("Handling submit")
   }
 
 
   render() {
     const { currentStep, lastStep } = this.state;
-    const { handleNext, handleBack, handleCancel } = this;
+    const { handleNext, handleBack, handleReset, handleSubmit } = this;
     const eventFormProps = {
       currentStep, lastStep,
-      clickHandlers: { handleNext, handleBack, handleCancel }
+      buttonHandlers: { handleNext, handleBack, handleReset, handleSubmit }
     }
 
     return (
