@@ -18,7 +18,6 @@ export class EventWizard extends Component {
       this.setState({ currentStep });
     }
   }
-
   handleBack = () => {
     let { currentStep } = this.state;
     if (currentStep > 1) {
@@ -26,13 +25,22 @@ export class EventWizard extends Component {
       this.setState({ currentStep });
     }
   }
+  handleCancel = () => {
+    let { currentStep } = this.state;
+    if (currentStep > 1) {
+      // TODO: Flush data
+      currentStep = 1;
+      this.setState({ currentStep });
+    }
+  }
+
 
   render() {
     const { currentStep, lastStep } = this.state;
-    const { handleNext, handleBack } = this;
+    const { handleNext, handleBack, handleCancel } = this;
     const eventFormProps = {
       currentStep, lastStep,
-      clickHandlers: { handleNext, handleBack }
+      clickHandlers: { handleNext, handleBack, handleCancel }
     }
 
     return (
