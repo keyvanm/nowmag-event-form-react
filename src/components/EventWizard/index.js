@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import Steps from './Steps';
 import { stepsArray } from '../../consts/steps';
+import EventForm from './EventForm';
 
 
 export class EventWizard extends Component {
@@ -9,12 +10,23 @@ export class EventWizard extends Component {
     currentStep: 1
   }
 
+  handleSubmit = () => {
+    let { currentStep } = this.state;
+    currentStep++;
+    this.setState({ currentStep });
+  }
+
   render() {
+    const { currentStep } = this.state;
+
     return (
-      <div>
+      <div className="event-wizard">
         <Steps
-          currentStep={this.state.currentStep} stepsArray={stepsArray}
-          ordered attached='top' widths={stepsArray.length} />
+          currentStep={currentStep} stepsArray={stepsArray}
+          ordered attached='top' widths={stepsArray.length}
+        />
+
+        <EventForm currentStep={currentStep} handleSubmit={this.handleSubmit} />
       </div>
     );
   }
