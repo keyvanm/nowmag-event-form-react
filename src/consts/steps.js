@@ -12,14 +12,21 @@ export const stepsArray = [
   {
     key: 'datetime',
     icon: 'calendar alternate outline',
-    title: "Date and Time"
+    title: "Date and Time",
   },
   {
-    key: 'eventContant',
-    // title: 'Event Contact',
+    key: 'eventContact',
+    title: 'Additional Info',
+    icon: 'globe',
   },
   {
-    key: 'submitterContact',
-    // title: 'Submitter Contact',
+    key: 'review',
+    title: "Review",
+    icon: 'send',
+  },
+  {
+    key: 'promote',
+    title: "Promote",
+    icon: 'angle double up',
   },
 ]
