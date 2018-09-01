@@ -1,0 +1,7 @@
+.react-datepicker__time-list {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+.react-datepicker-wrapper, .react-datepicker__input-container {
+  width: 100%
+}

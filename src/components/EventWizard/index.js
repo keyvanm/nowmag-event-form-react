@@ -4,10 +4,12 @@ import Steps from './Steps';
 import { stepsArray } from '../../consts/steps';
 import EventForm from './EventForm';
 
+import './index.css';
+
 
 export class EventWizard extends Component {
   state = {
-    currentStep: 2,
+    currentStep: 3,
     lastStep: 5,
     loading: false
   }

@@ -1,9 +1,11 @@
 import React from 'react'
 import { Checkbox, Form, Select, Input, TextArea, Dropdown, Divider, Radio, Popup, Header, Icon } from 'semantic-ui-react'
+import DatePicker from 'react-datepicker'
 
 import FormButtonGroup from './FormButtonGroup';
 
 import './EventForm.css'
+import 'react-datepicker/dist/react-datepicker.css';
 
 const categoryOptions = [
   {
@@ -77,6 +79,37 @@ const FormExampleForm = ({
               <p><em>301 Front St W, Toronto, ON M5V 2T6</em></p>
             </Popup>
           </Form.Field>
+        </div>
+      }
+      {
+        currentStep === 3 &&
+        <div className="wizard-page">
+          <Form.Group widths='equal'>
+            <Form.Field>
+              <label>When does your event start?</label>
+              <DatePicker
+                // selected={this.state.startDate}
+                // onChange={this.handleChange}
+                showTimeSelect
+                timeFormat="HH:mm"
+                timeIntervals={15}
+                dateFormat="LLL"
+                timeCaption="time"
+              />
+            </Form.Field>
+            <Form.Field>
+              <label>When does your event end? (Optional)</label>
+              <DatePicker
+                // selected={this.state.startDate}
+                // onChange={this.handleChange}
+                showTimeSelect
+                timeFormat="HH:mm"
+                timeIntervals={15}
+                dateFormat="LLL"
+                timeCaption="time"
+              />
+            </Form.Field>
+          </Form.Group>
         </div>
       }
 
