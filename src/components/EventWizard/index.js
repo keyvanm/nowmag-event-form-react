@@ -59,7 +59,7 @@ export class EventWizard extends Component {
       <div className="event-wizard">
         <Steps
           currentStep={currentStep} stepsArray={stepsArray}
-          ordered attached='top' widths={stepsArray.length}
+          attached='top' widths={stepsArray.length}
         />
         <EventForm {...eventFormProps} />
       </div>

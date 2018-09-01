@@ -1,15 +1,18 @@
 export const stepsArray = [
   {
-    key: 'info',
-    // title: 'Event Info',
+    key: 'add',
+    icon: 'add',
+    title: "Add Event",
   },
   {
     key: 'location',
-    // title: 'Location',
+    icon: 'location arrow',
+    title: "Location",
   },
   {
     key: 'datetime',
-    // title: 'Date and Time',
+    icon: 'calendar alternate outline',
+    title: "Date and Time"
   },
   {
     key: 'eventContant',
