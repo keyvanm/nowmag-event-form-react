@@ -1,22 +1,22 @@
 export const stepsArray = [
   {
     key: 'info',
-    title: 'Event Info',
+    // title: 'Event Info',
   },
   {
     key: 'location',
-    title: 'Location',
+    // title: 'Location',
   },
   {
     key: 'datetime',
-    title: 'Date and Time',
+    // title: 'Date and Time',
   },
   {
     key: 'eventContant',
-    title: 'Event Contact',
+    // title: 'Event Contact',
   },
   {
     key: 'submitterContact',
-    title: 'Submitter Contact',
+    // title: 'Submitter Contact',
   },
 ]

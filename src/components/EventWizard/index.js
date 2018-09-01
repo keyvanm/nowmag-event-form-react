@@ -42,6 +42,7 @@ export class EventWizard extends Component {
       return
     }
     this.setState({ loading: true });
+    // this.props.handleData()
     setTimeout(() => this.setState({ loading: false }), 2000)
   }
 
