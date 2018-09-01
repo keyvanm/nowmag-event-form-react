@@ -9,7 +9,7 @@ import './index.css';
 
 export class EventWizard extends Component {
   state = {
-    currentStep: 3,
+    currentStep: 1,
     lastStep: 5,
     loading: false
   }
