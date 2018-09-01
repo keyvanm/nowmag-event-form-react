@@ -24,7 +24,7 @@ const Steps =  ({ stepsArray, currentStep, ...props }) => {
     return {
       ...stepObject,
       [status]: true,
-      onClick: () => { alert() }
+      onClick: index === currentStep - 1 ? undefined : () => { alert() }
     }
   });
   return <Step.Group items={augmentedStepsArray} {...props} />
