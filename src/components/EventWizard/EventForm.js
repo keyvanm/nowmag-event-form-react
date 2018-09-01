@@ -38,15 +38,15 @@ const FormExampleForm = ({
       {
         currentStep === 1 &&
         <div className="wizard-page">
-          <Form.Field>
+          <Form.Field required>
             <label>What is the title of your event?</label>
             <Input autoFocus={true} placeholder='Title' />
           </Form.Field>
-          <Form.Field>
+          <Form.Field required>
             <label>Which of these categories best describe your event?</label>
             <Select placeholder='Category' options={categoryOptions} />
           </Form.Field>
-          <Form.Field>
+          <Form.Field required>
             <label>Describe your event in a few sentences</label>
             <TextArea autoHeight placeholder='Description'  />
           </Form.Field>
@@ -85,7 +85,7 @@ const FormExampleForm = ({
         currentStep === 3 &&
         <div className="wizard-page">
           <Form.Group widths='equal'>
-            <Form.Field>
+            <Form.Field required>
               <label>When does your event start?</label>
               <DatePicker
                 // selected={this.state.startDate}
