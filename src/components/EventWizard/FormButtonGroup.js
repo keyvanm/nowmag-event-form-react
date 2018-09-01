@@ -1,18 +1,51 @@
 import React, { Component } from 'react';
-import { Button, Confirm } from 'semantic-ui-react'
+import { Button, Modal, Header, Icon } from 'semantic-ui-react'
 
 import './FormButtonGroup.css';
 
 
-export default class FormButtonGroup extends Component {
-  // RCB = ResetConfirmBox
-  state = { isRCBOpen: false }
 
-  showRCB = (e) => this.setState({ isRCBOpen: true })
-  handleRCBCancelReset = () => this.setState({ isRCBOpen: false })
-  handleRCBReset = (e) => {
+function ResetConfirmModal({ isOpen, handleOpen, handleNo, handleYes, handleClose }) {
+  return (
+    <Modal trigger={<Button className="reset" basic onClick={handleOpen}>Reset</Button>} basic size='small' onClose={handleClose} open={isOpen}>
+      <Header icon='warning' content='Are you sure you want to reset the form?' />
+      <Modal.Content>
+        <p>
+          If you continue you will lose all you have entered so far
+        </p>
+      </Modal.Content>
+      <Modal.Actions>
+        <Button basic color='red' inverted onClick={handleNo}>
+          <Icon name='remove' /> No, I don't want to reset the form
+        </Button>
+        <Button color='green' inverted onClick={handleYes}>
+          <Icon name='checkmark' /> I understand, reset the form
+        </Button>
+      </Modal.Actions>
+    </Modal>
+  )
+}
+
+export default class FormButtonGroup extends Component {
+  // RCM = ResetConfirmBox
+  state = { isRCMOpen: false }
+
+  handleRCMOpen = (e) => {
+    e.preventDefault();
+    this.setState({ isRCMOpen: true })
+  }
+  handleRCMClose = (e) => {
+    e.preventDefault();
+    this.setState({ isRCMOpen: false })
+  }
+  handleRCMNo = (e) => {
+    e.preventDefault();
+    this.handleRCMClose(e);
+  }
+  handleRCMYes = (e) => {
+    e.preventDefault();
     this.props.buttonHandlers.handleReset(e);
-    this.setState({ isRCBOpen: false })
+    this.handleRCMClose(e);
   }
 
   render () {
@@ -22,10 +55,18 @@ export default class FormButtonGroup extends Component {
       buttonHandlers: { handleBack, handleNext }
     } = this.props;
 
+    const rcmProps = {
+      isOpen: this.state.isRCMOpen,
+      handleOpen: this.handleRCMOpen,
+      handleNo: this.handleRCMNo,
+      handleYes: this.handleRCMYes,
+      handleClose: this.handleRCMClose
+    }
+
     return (
       <div className="form-button-group">
         <div className="left-form-button-group">
-          <Button className="reset" onClick={this.showRCB} basic>Reset</Button>
+          <ResetConfirmModal {...rcmProps} />
         </div>
         <div className="right-form-button-group">
           {
@@ -35,15 +76,6 @@ export default class FormButtonGroup extends Component {
 
           <Button loading={loading} disabled={loading || !submit} positive type='submit'>Submit</Button>
         </div>
-
-        <Confirm
-          open={this.state.isRCBOpen}
-          content='If you continue you will lose all you have entered so far'
-          confirmButton="I understand, reset my entry"
-          cancelButton="Never mind, I want to keep my entry"
-          onCancel={this.handleRCBCancelReset}
-          onConfirm={this.handleRCBReset}
-        />
       </div>
     )
   }
