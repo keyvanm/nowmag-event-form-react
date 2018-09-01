@@ -18,14 +18,14 @@ function getStepStatus(index, currentStep) {
 }
 
 
-const Steps =  ({ stepsArray, currentStep, ...props }) => {
+const Steps =  ({ stepsArray, currentStep, handleClick, ...props }) => {
   const augmentedStepsArray = stepsArray.map( (stepObject, index) => {
     const status = getStepStatus(index, currentStep);
     const isCurrentStep = index === currentStep - 1;
     return {
       ...stepObject,
       [status]: true,
-      onClick: isCurrentStep ? undefined : () => { alert() }
+      onClick: isCurrentStep ? undefined : () => { handleClick(index) }
     }
   });
   return <Step.Group items={augmentedStepsArray} {...props} />

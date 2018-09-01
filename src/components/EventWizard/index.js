@@ -7,7 +7,7 @@ import EventForm from './EventForm';
 
 export class EventWizard extends Component {
   state = {
-    currentStep: 1,
+    currentStep: 2,
     lastStep: 5,
     loading: false
   }
@@ -46,6 +46,10 @@ export class EventWizard extends Component {
     setTimeout(() => this.setState({ loading: false }), 2000)
   }
 
+  handleStepsClick = (index) => {
+    this.setState({ currentStep: index + 1 });
+  }
+
 
   render() {
     const { currentStep, lastStep, loading } = this.state;
@@ -59,6 +63,7 @@ export class EventWizard extends Component {
       <div className="event-wizard">
         <Steps
           currentStep={currentStep} stepsArray={stepsArray}
+          handleClick={this.handleStepsClick}
           attached='top' widths={stepsArray.length}
         />
         <EventForm {...eventFormProps} />
