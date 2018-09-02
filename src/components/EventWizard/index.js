@@ -86,6 +86,11 @@ export default withFormik({
     },
     start: null,
     end: null,
+    website: '',
+    phone_number: '',
+    email: '',
+    facebook: '',
+    contactEmail: ''
   }),
   handleSubmit: (
     values,

@@ -10,6 +10,14 @@ const event = {
 
 export class WizardFormReviewPage extends Component {
   render() {
+    const {
+      values,
+      errors,
+      touched,
+      handleChange,
+      handleBlur,
+    } = this.props;
+
     return (
       <div className="wizard-page">
         <Message success visible icon='check'
@@ -21,11 +29,19 @@ export class WizardFormReviewPage extends Component {
 
         <Segment>
           <Header>Review your event</Header>
-          <EventReviewCard event={this.props.values} />
+          <EventReviewCard event={values} />
         </Segment>
         <Form.Field>
           <label>What is an email we (NOW Toronto) can contact you at?</label>
-          <Input autoFocus={true} icon='mail' iconPosition='left' placeholder='Contact email' />
+          <Input
+            autoFocus={true}
+            icon='mail' iconPosition='left'
+            placeholder='Contact email'
+            name='contactEmail'
+            value={values.contactEmail}
+            onChange={handleChange}
+            onBlur={handleBlur}
+          />
         </Form.Field>  
       </div>
     );
