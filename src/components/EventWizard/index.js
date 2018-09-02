@@ -83,7 +83,9 @@ export default withFormik({
       isNewVenue: false,
       existingVenue: '',
       newVenue: { name: '', address: '' },
-    }
+    },
+    start: null,
+    end: null,
   }),
   handleSubmit: (
     values,
