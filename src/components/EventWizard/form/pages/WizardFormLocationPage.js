@@ -3,40 +3,98 @@ import { Form, Input, Dropdown, Divider, Radio, Popup, Header, Icon } from 'sema
 
 const locationOptions = [
   {
-    'text': "Art",
-    'key': 0, // pk?
-    'value': 0, // pk?
+    'text': "Here and Now",
+    'key': '0-0-0-0', // uuid
+    'value': '0-0-0-0', // uuid
   }
 ]
 
 export class WizardFormLocationPage extends Component {
-  state = {
-    newVenue: false
+  setFieldValue = (field, value) => {
+    const { values: { location } } = this.props;
+    const newLocation = { ...location, [field]: value }
+    this.props.setFieldValue('location', newLocation)
   }
 
+  handleLocationDropdownChange = (event, data) => {
+    console.log(data);
+    this.setFieldValue('existingVenue', data.value)
+  }
+
+  handleNewLocationToggle = (event, data) => {
+    this.setFieldValue('isNewVenue', data.checked)
+  }
+
+  handleNewLocationNameChange = (event, data) => {
+    const { values: { location: { newVenue } } } = this.props;
+    const newNewVenue = { ...newVenue, name: data.value }
+    this.setFieldValue('newVenue', newNewVenue)
+  }
+
+  handleNewLocationAddressChange = (event, data) => {
+    const { values: { location: { newVenue } } } = this.props;
+    const newNewVenue = { ...newVenue, address: data.value }
+    this.setFieldValue('newVenue', newNewVenue)
+  }
+
+
+
   render() {
+    const {
+      values: { location },
+      errors,
+      touched,
+      handleChange,
+      handleBlur,
+    } = this.props;
+
+    const AddressInput = () => (
+      <Input
+        icon='location arrow' iconPosition='left' placeholder='Address (e.g. 301 Front St W, Toronto, ON M5V 2T6)'
+        name='location'
+        value={location.newVenue.address}
+        onChange={this.handleNewLocationAddressChange}
+        onBlur={handleBlur}
+      />
+    )
+
     return (
       <div className="wizard-page">
-        { !this.state.newVenue && 
+        { !location.isNewVenue && 
           <Form.Field>
             <label>Where is your event located?</label>
-            <Dropdown autoFocus={true}  placeholder='Location' fluid search selection options={locationOptions} />
+            <Dropdown
+              fluid search selection
+              autoFocus={true} 
+              placeholder='Location'
+              name='location'
+              options={locationOptions}
+              value={location.existingVenue}
+              onChange={this.handleLocationDropdownChange}
+            />
           </Form.Field>
         }
         <Divider horizontal>Or</Divider>
         <Form.Field>
-          <Radio toggle label="I couldn't find the venue on the above list" onChange={ (e, d) => this.setState( { newVenue: d.checked }) } />
+          <Radio toggle label="I couldn't find the venue on the above list" onChange={this.handleNewLocationToggle} />
         </Form.Field>
-        { this.state.newVenue && 
+        { location.isNewVenue && 
           <div>
             <Form.Field>
               <label>Enter the location details manually</label>
-              <Input icon='home' iconPosition='left' placeholder='Name (e.g. CN Tower)' />
+              <Input
+                icon='home' iconPosition='left'
+                placeholder='Name (e.g. CN Tower)'
+                name='location'
+                value={location.newVenue.name}
+                onChange={this.handleNewLocationNameChange}
+                onBlur={handleBlur}
+              />
             </Form.Field>
             <Form.Field>
               <Popup
                 flowing
-                trigger={<Input icon='location arrow' iconPosition='left' placeholder='Address (e.g. 301 Front St W, Toronto, ON M5V 2T6)' />}
+                trigger={<AddressInput />}
                 on='focus'
               >
                 <Header color='yellow' icon='info' content="hint" as='h6' />
