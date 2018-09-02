@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form } from 'semantic-ui-react'
+import { Form, Message } from 'semantic-ui-react'
 
 import FormButtonGroup from './FormButtonGroup';
 import WizardFormAddPage from './pages/WizardFormAddPage';
@@ -17,10 +17,11 @@ const FormExampleForm = ({
   buttonHandlers,
   form
 }) => {
+  const { status, errors } = form;
   const buttonAbility = {
-    back: currentStep !== 1,
-    next: currentStep < lastStep,
-    submit: currentStep === lastStep
+    back: !status && currentStep !== 1,
+    next: status || (currentStep < lastStep),
+    submit: !status && currentStep === lastStep
   }
 
   const onKeyPress = (event) => {
@@ -33,27 +34,35 @@ const FormExampleForm = ({
   return (
     <Form
       onKeyPress={onKeyPress} onSubmit={buttonHandlers.handleEnterBtn}
-      success={form.status}
+      success={status}
       // error={form.errors}
     >
+      <Message success icon='check' className='wizard-message'
+        content="Event successfully created! Click next"
+      />
+      {/* <Message error>
+        {
+          form.errors.map()
+        }
+      </Message> */}
       {
-        currentStep === 1 &&
+        !status && currentStep === 1 &&
         <WizardFormAddPage {...form} />        
       }
       {
-        currentStep === 2 &&
+        !status && currentStep === 2 &&
         <WizardFormLocationPage {...form} />
       }
       {
-        currentStep === 3 &&
+        !status && currentStep === 3 &&
         <WizardFormDatePage {...form} />        
       }
       {
-        currentStep === 4 &&
+        !status && currentStep === 4 &&
         <WizardFormInfoPage {...form} />        
       }
       {
-        currentStep === 5 &&
+        !status && currentStep === 5 &&
         <WizardFormReviewPage {...form} />        
       }
 

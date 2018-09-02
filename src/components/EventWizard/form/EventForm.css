@@ -1,4 +1,8 @@
 .wizard-page {
   margin-bottom: 1em;
-  margin-top: 1em;
+}
+
+.event-wizard .form {
+  padding-bottom: 1em;
+  padding-top: 1em;
 }
