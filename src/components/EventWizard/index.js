@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withFormik } from 'formik';
 
 import Steps from './Steps';
 import { stepsArray } from '../../consts/steps';
@@ -9,12 +10,11 @@ import './index.css';
 
 export class EventWizard extends Component {
   state = {
-    currentStep: 1,
+    currentStep: 5,
     lastStep: 5,
-    loading: false
   }
 
-  handleNext = (e) => {
+  handleNextBtn = (e) => {
     e.preventDefault();
     let { currentStep, lastStep } = this.state;
     if (currentStep < lastStep) {
@@ -22,7 +22,7 @@ export class EventWizard extends Component {
       this.setState({ currentStep });
     }
   }
-  handleBack = (e) => {
+  handleBackBtn = (e) => {
     e.preventDefault();
     let { currentStep } = this.state;
     if (currentStep > 1) {
@@ -30,22 +30,20 @@ export class EventWizard extends Component {
       this.setState({ currentStep });
     }
   }
-  handleReset = (e) => {
+  handleResetBtn = (e) => {
     e.preventDefault();
-    // TODO: Flush data
+    this.props.handleReset();
     this.setState({ currentStep: 1 });
   }
 
-  handleSubmit = (e) => {
+  handleEnterBtn = (e) => {
     e.preventDefault();
     let { currentStep, lastStep } = this.state;
     if (currentStep < lastStep) {
-      this.handleNext(e)
+      this.handleNextBtn(e)
       return
     }
-    this.setState({ loading: true });
-    // this.props.handleData()
-    setTimeout(() => this.setState({ loading: false }), 2000)
+    this.props.handleSubmit()
   }
 
   handleStepsClick = (index) => {
@@ -54,11 +52,29 @@ export class EventWizard extends Component {
 
 
   render() {
-    const { currentStep, lastStep, loading } = this.state;
-    const { handleNext, handleBack, handleReset, handleSubmit } = this;
+    const { currentStep, lastStep } = this.state;
+    const { handleNextBtn, handleBackBtn, handleResetBtn, handleEnterBtn } = this;
+    const {
+      values,
+      errors,
+      touched,
+      handleChange,
+      handleBlur,
+      handleSubmit,
+      isSubmitting,
+    } = this.props;
     const eventFormProps = {
-      currentStep, lastStep, loading,
-      buttonHandlers: { handleNext, handleBack, handleReset, handleSubmit }
+      currentStep, lastStep,
+      buttonHandlers: { handleNextBtn, handleBackBtn, handleResetBtn, handleEnterBtn },
+      form: {
+        values,
+        errors,
+        touched,
+        handleChange,
+        handleBlur,
+        handleSubmit,
+        isSubmitting,
+      }
     }
 
     return (
@@ -74,4 +90,15 @@ export class EventWizard extends Component {
   }
 }
 
-export default EventWizard;
+export default withFormik({
+  handleSubmit: (
+    values,
+    {
+      props,
+      setSubmitting,
+      setErrors /* setValues, setStatus, and other goodies */,
+    }
+  ) => {
+    setTimeout(() => setSubmitting(false), 2000);
+  },
+})(EventWizard);

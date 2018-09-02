@@ -13,8 +13,9 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 
 const FormExampleForm = ({
-  currentStep, lastStep, loading,
-  buttonHandlers
+  currentStep, lastStep,
+  buttonHandlers,
+  form
 }) => {
   const buttonAbility = {
     back: currentStep !== 1,
@@ -25,34 +26,34 @@ const FormExampleForm = ({
   const onKeyPress = (event) => {
     if (event.key === 'Enter') {
       event.preventDefault();
-      buttonHandlers.handleSubmit(event);
+      buttonHandlers.handleEnter(event);
     }
   }
 
   return (
-    <Form onKeyPress={onKeyPress} onSubmit={buttonHandlers.handleSubmit}>
+    <Form onKeyPress={onKeyPress} onSubmit={form.handleSubmit}>
       {
         currentStep === 1 &&
-        <WizardFormAddPage />        
+        <WizardFormAddPage {...form} />        
       }
       {
         currentStep === 2 &&
-        <WizardFormLocationPage />
+        <WizardFormLocationPage {...form} />
       }
       {
         currentStep === 3 &&
-        <WizardFormDatePage />        
+        <WizardFormDatePage {...form} />        
       }
       {
         currentStep === 4 &&
-        <WizardFormInfoPage />        
+        <WizardFormInfoPage {...form} />        
       }
       {
         currentStep === 5 &&
-        <WizardFormReviewPage />        
+        <WizardFormReviewPage {...form} />        
       }
 
-      <FormButtonGroup loading={loading} buttonAbility={buttonAbility} buttonHandlers={buttonHandlers} />
+      <FormButtonGroup loading={form.isSubmitting} buttonAbility={buttonAbility} buttonHandlers={buttonHandlers} />
 
     </Form>
   )
