@@ -15,8 +15,6 @@ export class WizardFormDatePage extends Component {
       values,
       errors,
       touched,
-      handleChange,
-      handleBlur,
     } = this.props;
 
     return (

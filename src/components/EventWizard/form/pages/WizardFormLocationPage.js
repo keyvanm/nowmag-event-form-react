@@ -44,7 +44,6 @@ export class WizardFormLocationPage extends Component {
       values: { location },
       errors,
       touched,
-      handleChange,
       handleBlur,
     } = this.props;
 

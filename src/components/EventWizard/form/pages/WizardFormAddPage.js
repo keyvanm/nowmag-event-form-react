@@ -23,12 +23,19 @@ export class WizardFormAddPage extends Component {
       touched,
       handleChange,
       handleBlur,
-      handleSubmit,
-      isSubmitting,
     } = this.props;
 
     return (
       <div className="wizard-page">
+          {/* <Message error>
+            <Item.Group>
+              {
+                errors.map((error, index) => (
+                  <Item key={index} description={error} />
+                ))
+              }
+            </Item.Group>
+          </Message> */}
           <Form.Field required>
             <label>What is the title of your event?</label>
             <Input
