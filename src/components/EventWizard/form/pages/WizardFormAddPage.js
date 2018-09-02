@@ -5,26 +5,62 @@ import { Form, Select, Input, TextArea } from 'semantic-ui-react'
 const categoryOptions = [
   {
     'text': "Art",
-    'key': 0, // pk?
-    'value': 0, // pk?
+    'key': 'art', // slug
+    'value': 'art',
   }
 ]
 
 export class WizardFormAddPage extends Component {
+  handleCategoryChange = (event, data) => {
+    console.log(data);
+    this.props.setFieldValue('category', data.value)
+  }
+
   render() {
+    const {
+      values,
+      errors,
+      touched,
+      handleChange,
+      handleBlur,
+      handleSubmit,
+      isSubmitting,
+    } = this.props;
+
     return (
       <div className="wizard-page">
           <Form.Field required>
             <label>What is the title of your event?</label>
-            <Input autoFocus={true} placeholder='Title' />
+            <Input
+              autoFocus={true}
+              placeholder='Title'
+              name='name'
+              value={values.name}
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
           </Form.Field>
           <Form.Field required>
             <label>Which of these categories best describe your event?</label>
-            <Select placeholder='Category' options={categoryOptions} />
+            <Select
+              placeholder='Category'
+              options={categoryOptions}
+              name='category'
+              value={values.category}
+              onChange={this.handleCategoryChange}
+              // onBlur={handleBlur}
+            />
           </Form.Field>
           <Form.Field required>
             <label>Describe your event in a few sentences</label>
-            <TextArea autoHeight placeholder='Description'  />
+            <TextArea
+              autoHeight
+              placeholder='Description'
+              name='description'
+              value={values.description}
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
           </Form.Field>
         </div>
     );

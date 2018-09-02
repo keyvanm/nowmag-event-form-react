@@ -10,7 +10,7 @@ import './index.css';
 
 export class EventWizard extends Component {
   state = {
-    currentStep: 5,
+    currentStep: 1,
     lastStep: 5,
   }
 
@@ -54,27 +54,11 @@ export class EventWizard extends Component {
   render() {
     const { currentStep, lastStep } = this.state;
     const { handleNextBtn, handleBackBtn, handleResetBtn, handleEnterBtn } = this;
-    const {
-      values,
-      errors,
-      touched,
-      handleChange,
-      handleBlur,
-      handleSubmit,
-      isSubmitting,
-    } = this.props;
+
     const eventFormProps = {
       currentStep, lastStep,
       buttonHandlers: { handleNextBtn, handleBackBtn, handleResetBtn, handleEnterBtn },
-      form: {
-        values,
-        errors,
-        touched,
-        handleChange,
-        handleBlur,
-        handleSubmit,
-        isSubmitting,
-      }
+      form: this.props,
     }
 
     return (
@@ -91,6 +75,11 @@ export class EventWizard extends Component {
 }
 
 export default withFormik({
+  mapPropsToValues: props => ({
+    name: '',
+    category: '',
+    description: '',
+  }),
   handleSubmit: (
     values,
     {

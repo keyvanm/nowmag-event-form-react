@@ -44,7 +44,7 @@ export default class FormButtonGroup extends Component {
   }
   handleRCMYes = (e) => {
     e.preventDefault();
-    this.props.buttonHandlers.handleReset(e);
+    this.props.buttonHandlers.handleResetBtn(e);
     this.handleRCMClose(e);
   }
 
@@ -52,7 +52,7 @@ export default class FormButtonGroup extends Component {
     const {
       loading,
       buttonAbility: { back, next, submit },
-      buttonHandlers: { handleBack, handleNext }
+      buttonHandlers: { handleBackBtn, handleNextBtn }
     } = this.props;
 
     const rcmProps = {
@@ -70,9 +70,9 @@ export default class FormButtonGroup extends Component {
         </div>
         <div className="right-form-button-group">
           {
-            back && <Button loading={loading} disabled={loading} onClick={handleBack}>Back</Button>
+            back && <Button loading={loading} disabled={loading} onClick={handleBackBtn}>Back</Button>
           }
-          <Button loading={loading} disabled={loading || !next} onClick={handleNext} primary>Next</Button>
+          <Button loading={loading} disabled={loading || !next} onClick={handleNextBtn} primary>Next</Button>
 
           <Button loading={loading} disabled={loading || !submit} positive type='submit'>Create Event</Button>
         </div>

@@ -31,7 +31,7 @@ const FormExampleForm = ({
   }
 
   return (
-    <Form onKeyPress={onKeyPress} onSubmit={form.handleSubmit}>
+    <Form onKeyPress={onKeyPress} onSubmit={buttonHandlers.handleEnterBtn}>
       {
         currentStep === 1 &&
         <WizardFormAddPage {...form} />        

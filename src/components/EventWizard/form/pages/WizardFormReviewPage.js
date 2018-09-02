@@ -21,7 +21,7 @@ export class WizardFormReviewPage extends Component {
 
         <Segment>
           <Header>Review your event</Header>
-          <EventReviewCard event={event} />
+          <EventReviewCard event={this.props.values} />
         </Segment>
         <Form.Field>
           <label>What is an email we (NOW Toronto) can contact you at?</label>
