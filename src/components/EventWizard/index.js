@@ -75,6 +75,7 @@ export class EventWizard extends Component {
 }
 
 export default withFormik({
+  status: null,
   mapPropsToValues: props => ({
     name: '',
     category: '',
@@ -98,8 +99,13 @@ export default withFormik({
       props,
       setSubmitting,
       setErrors /* setValues, setStatus, and other goodies */,
+      setStatus,
     }
   ) => {
-    setTimeout(() => setSubmitting(false), 2000);
+    console.log(values);
+    setTimeout(() => {
+      setStatus(true)
+      setSubmitting(false);
+    }, 2000);
   },
 })(EventWizard);

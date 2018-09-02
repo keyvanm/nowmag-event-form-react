@@ -2,11 +2,6 @@ import React, { Component } from 'react';
 import { Form, Input, Message, Segment, Header } from 'semantic-ui-react'
 import EventReviewCard from '../EventReviewCard';
 
-const event = {
-  name: "Name",
-  category: "Category",
-  description: "Description"
-}
 
 export class WizardFormReviewPage extends Component {
   render() {
@@ -20,7 +15,7 @@ export class WizardFormReviewPage extends Component {
 
     return (
       <div className="wizard-page">
-        <Message success visible icon='check'
+        <Message success icon='check'
           content="Event successfully created! Click next"
         />
         <Message warning visible icon='warning'

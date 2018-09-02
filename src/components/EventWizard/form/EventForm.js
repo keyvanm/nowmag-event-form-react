@@ -26,12 +26,16 @@ const FormExampleForm = ({
   const onKeyPress = (event) => {
     if (event.key === 'Enter') {
       event.preventDefault();
-      buttonHandlers.handleEnter(event);
+      buttonHandlers.handleEnterBtn(event);
     }
   }
 
   return (
-    <Form onKeyPress={onKeyPress} onSubmit={buttonHandlers.handleEnterBtn}>
+    <Form
+      onKeyPress={onKeyPress} onSubmit={buttonHandlers.handleEnterBtn}
+      success={form.status}
+      // error={form.errors}
+    >
       {
         currentStep === 1 &&
         <WizardFormAddPage {...form} />        
