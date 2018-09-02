@@ -12,9 +12,13 @@ export class WizardFormReviewPage extends Component {
   render() {
     return (
       <div className="wizard-page">
+        <Message success visible icon='check'
+          content="Event successfully created! Click next"
+        />
         <Message warning visible icon='warning'
           content="Please review your event carefully. You won't be able to edit it past this page."
         />
+
         <Segment>
           <Header>Review your event</Header>
           <EventReviewCard event={event} />

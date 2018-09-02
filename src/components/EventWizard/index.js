@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import Steps from './Steps';
 import { stepsArray } from '../../consts/steps';
-import EventForm from './EventForm';
+import EventForm from './form/EventForm';
 
 import './index.css';
 
