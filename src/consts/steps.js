@@ -2,7 +2,7 @@ export const stepsArray = [
   {
     key: 'add',
     icon: 'add',
-    title: "Create Event",
+    title: "Event Information",
   },
   {
     key: 'location',

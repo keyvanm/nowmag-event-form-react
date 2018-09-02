@@ -1,6 +1,8 @@
 import React from 'react';
 import { Step } from 'semantic-ui-react'
 
+import './Steps.css';
+
 const COMPLETED = 'completed';
 const ACTIVE = 'active';
 const DISABLED = 'disabled';

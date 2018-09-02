@@ -66,7 +66,7 @@ export class EventWizard extends Component {
         <Steps
           currentStep={currentStep} stepsArray={stepsArray}
           handleClick={this.handleStepsClick}
-          attached='top' widths={stepsArray.length}
+          attached='top' widths={stepsArray.length} unstackable
         />
         <EventForm {...eventFormProps} />
       </div>
