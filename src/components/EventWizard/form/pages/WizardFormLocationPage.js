@@ -10,6 +10,9 @@ const locationOptions = [
 ]
 
 export class WizardFormLocationPage extends Component {
+  componentWillUnmount () {
+    this.handleTouch();
+  }
   handleTouch = () => {
     this.props.setTouched({ ...this.props.touched, location: true });
   }

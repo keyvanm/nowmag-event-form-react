@@ -11,6 +11,10 @@ const categoryOptions = [
 ]
 
 export class WizardFormAddPage extends Component {
+  componentWillUnmount () {
+    this.props.setTouched({ ...this.props.touched, name: true, category: true, description: true });
+  }
+
   handleCategoryChange = (event, data) => {
     console.log(data);
     this.props.setFieldValue('category', data.value)

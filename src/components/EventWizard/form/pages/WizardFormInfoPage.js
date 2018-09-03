@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import { Form, Input, Message } from 'semantic-ui-react'
 
 export class WizardFormInfoPage extends Component {
+  componentWillUnmount () {
+    this.props.setTouched({ ...this.props.touched, website: true, email: true, phone_number: true, facebook: true });
+  }
+
   render() {
     const {
       values,
@@ -16,7 +20,7 @@ export class WizardFormInfoPage extends Component {
           <Message info icon='info'
             content="Please note that at least one of the following is needed" />
           <Form.Group widths='equal'>
-            <Form.Field>
+            <Form.Field error={ touched.website && errors.website }>
               <label>Does your event have an online website? If so enter it here</label>
               <Input
                 icon='globe' iconPosition='left'
@@ -28,7 +32,7 @@ export class WizardFormInfoPage extends Component {
                 onBlur={handleBlur}
               />
             </Form.Field>
-            <Form.Field>
+            <Form.Field error={ touched.phone_number && errors.phone_number }>
               <label>Is there a phone number potential guests can contact you at?</label>
               <Input
                 icon='phone' iconPosition='left'
@@ -41,7 +45,7 @@ export class WizardFormInfoPage extends Component {
             </Form.Field>
           </Form.Group>
           <Form.Group widths='equal'>
-            <Form.Field>
+            <Form.Field error={ touched.email && errors.email }>
               <label>Is there an email potential guests can contact you at?</label>
               <Input
                 icon='mail' iconPosition='left'
@@ -52,16 +56,16 @@ export class WizardFormInfoPage extends Component {
                 onBlur={handleBlur}
               />
             </Form.Field>
-            <Form.Field>
+            <Form.Field error={ touched.facebook && errors.facebook }>
               <label>Does your event have a Facebook page?</label>
-            <Input
-              icon='facebook' iconPosition='left'
-              placeholder='Facebook'
-              name='facebook'
-              value={values.facebook}
-              onChange={handleChange}
-              onBlur={handleBlur}
-            />
+              <Input
+                icon='facebook' iconPosition='left'
+                placeholder='Facebook'
+                name='facebook'
+                value={values.facebook}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
             </Form.Field>
           </Form.Group>
         </div>
