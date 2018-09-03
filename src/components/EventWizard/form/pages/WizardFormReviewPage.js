@@ -26,10 +26,9 @@ export class WizardFormReviewPage extends Component {
           content="Please review your event carefully. You won't be able to edit it past this page."
         />
 
-        <Segment>
-          <Header>Review your event</Header>
-          <EventReviewCard event={values} />
-        </Segment>
+        <Header>Review your event</Header>
+        <EventReviewCard values={values} />
+
         <Form.Field error={ touched.contactEmail && Boolean(errors.contactEmail) }>
           <label>What is an email we (NOW Toronto) can contact you at?</label>
           <Input
