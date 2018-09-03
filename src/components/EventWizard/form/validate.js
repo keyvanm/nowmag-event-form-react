@@ -33,50 +33,50 @@ export default (values, props) => {
   if (!yup.string().required().isValidSync(values.description)) {
     errors.description = <p>Please write a <b>description</b> for your event</p>
   } else if (!yup.string().max(400).isValidSync(values.description)) {
-    errors.description = <p>Please keep the <b>description</b> under 400 characters></p>
+    errors.description = <p>Please keep the <b>description</b> under 400 characters</p>
   }
 
   if (values.location.isNewVenue) {
     const { newVenue } = values.location;
     if (!newVenue.name) {
-      errors.location = "Please provide the name of the new venue"
+      errors.location = <p>Please provide the name of the new <b>venue</b></p>
     } else if (!newVenue.address) {
-      errors.location = "Please provide the address of the new venue"
+      errors.location = <p>Please provide the address of the new <b>venue</b></p>
     }
   } else {
     if (!values.location.existingVenue) {
-      errors.location = "Please pick a location from the list"
+      errors.location = <p>Please pick a <b>location</b> from the list</p>
     }
   }
 
   if (!eventSchema.start.isValidSync(values.start)) {
-    errors.start = "Please provide a valid start date and time for your event"
+    errors.start = <p>Please provide a valid <b>start date and time</b> for your event</p>
   } else if (values.end && !eventSchema.end.isValidSync(values.end)) {
-    errors.end = "Please provide a valid end date and time for your event, or remove it entirely"
+    errors.end = <p>Please provide a valid <b>end date and time</b> for your event, or remove it entirely</p>
   } else if (values.end && values.end.isBefore(values.start)) {
-    errors.end = "End date cannot be before start date"
+    errors.end = <p><b>End date</b> cannot be before start date</p>
   }
   const { website, phone_number, email, facebook } = values;
   if (!(website || phone_number || email || facebook)) {
-    errors.website = "At least one of the website, phone number, email or facebook is needed"
+    errors.website = <p>At least one of the <b>website, phone number, email or facebook</b> is needed</p>
   }
   if (website && !eventSchema.website.isValidSync(website)) {
-    errors.website = "Please make sure the website url is formatted like http(s)://..."
+    errors.website = <p>Please make sure the <b>website</b> url is formatted like http(s)://...</p>
   }
   if (phone_number && !eventSchema.phone_number.isValidSync(phone_number)) {
-    errors.phone_number = "Please format the phone number like so"
+    errors.phone_number = <p>Please format the <b>phone number</b> like so</p>
   }
   if (email && !eventSchema.email.isValidSync(email)) {
-    errors.email = "Please format the email"
+    errors.email = <p>Please format the <b>email</b></p>
   }
   if (facebook && !eventSchema.facebook.isValidSync(facebook)) {
-    errors.facebook = "Please format the facebook page like so"
+    errors.facebook = <p>Please format the <b>facebook</b> page like so</p>
   }
 
   if (!values.contactEmail) { 
-    errors.contactEmail = "Please provide an email you have access to. We need this in order to send you the confirmation"
+    errors.contactEmail = <p>Please provide an <b>email</b> you have access to. We need this in order to send you the confirmation</p>
   } else if (!eventSchema.contactEmail.isValidSync(values.contactEmail)) {
-    errors.contactEmail = "Please format the email"
+    errors.contactEmail = <p>Please provide a valid <b>email</b> address</p>
   }
   return errors;
 }
