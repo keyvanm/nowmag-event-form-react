@@ -4,6 +4,10 @@ import EventReviewCard from '../EventReviewCard';
 
 
 export class WizardFormReviewPage extends Component {
+  componentWillUnmount () {
+    this.props.setTouched({ ...this.props.touched, contactEmail: true });
+  }
+
   render() {
     const {
       values,
@@ -12,6 +16,9 @@ export class WizardFormReviewPage extends Component {
       handleChange,
       handleBlur,
     } = this.props;
+
+    console.log(touched.contactEmail);
+    console.log(errors);
 
     return (
       <div className="wizard-page">
@@ -23,7 +30,7 @@ export class WizardFormReviewPage extends Component {
           <Header>Review your event</Header>
           <EventReviewCard event={values} />
         </Segment>
-        <Form.Field>
+        <Form.Field error={ touched.contactEmail && Boolean(errors.contactEmail) }>
           <label>What is an email we (NOW Toronto) can contact you at?</label>
           <Input
             autoFocus={true}

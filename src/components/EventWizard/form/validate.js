@@ -17,7 +17,7 @@ export const eventSchema = /*yup.object*/({
   phone_number: yup.string(),  
   facebook: yup.string().url(),
   email: yup.string().email(),
-  contact_email: yup.string().email().required(),
+  contactEmail: yup.string().email().required(),
 });
 
 export default (values, props) => {
@@ -70,6 +70,12 @@ export default (values, props) => {
   }
   if (facebook && !eventSchema.facebook.isValidSync(facebook)) {
     errors.facebook = "Please format the facebook page like so"
+  }
+
+  if (!values.contactEmail) { 
+    errors.contactEmail = "Please provide an email you have access to. We need this in order to send you the confirmation"
+  } else if (!eventSchema.contactEmail.isValidSync(values.contactEmail)) {
+    errors.contactEmail = "Please format the email"
   }
   return errors;
 }
