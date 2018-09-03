@@ -21,7 +21,7 @@ export class WizardFormInfoPage extends Component {
               <Input
                 icon='globe' iconPosition='left'
                 autoFocus={true} 
-                laceholder='Website'
+                placeholder='Website'
                 name='website'
                 value={values.website}
                 onChange={handleChange}

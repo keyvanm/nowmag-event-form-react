@@ -31,20 +31,27 @@ const FormExampleForm = ({
     }
   }
 
+  console.log("//// NEW RENDER ////")
+  console.log(form.errors)
+  console.log(form.touched)
+  console.log("//// DONE ////")
+
   return (
     <Form
       onKeyPress={onKeyPress} onSubmit={buttonHandlers.handleEnterBtn}
       success={status}
-      // error={form.errors}
+      error={Object.keys(form.errors).filter( key => form.touched[key]).length > 0}
     >
       <Message success icon='check' className='wizard-message'
         content="Event successfully created! Click next"
       />
-      {/* <Message error>
-        {
-          form.errors.map()
-        }
-      </Message> */}
+      <Message error>
+        <ul>{
+          Object.keys(form.errors).filter( key => form.touched[key]).map( key => (
+            <li key={key}>{form.errors[key]}</li>
+          ))
+        }</ul>
+      </Message>
       {
         !status && currentStep === 1 &&
         <WizardFormAddPage {...form} />        

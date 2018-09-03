@@ -55,7 +55,7 @@ export class WizardFormAddPage extends Component {
               name='category'
               value={values.category}
               onChange={this.handleCategoryChange}
-              // onBlur={handleBlur}
+              onBlur={handleBlur}
             />
           </Form.Field>
           <Form.Field required>

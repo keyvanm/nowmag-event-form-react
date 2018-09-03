@@ -10,7 +10,12 @@ const locationOptions = [
 ]
 
 export class WizardFormLocationPage extends Component {
+  handleTouch = () => {
+    this.props.setTouched({ ...this.props.touched, location: true });
+  }
+
   setFieldValue = (field, value) => {
+    this.handleTouch();
     const { values: { location } } = this.props;
     const newLocation = { ...location, [field]: value }
     this.props.setFieldValue('location', newLocation)
@@ -53,7 +58,7 @@ export class WizardFormLocationPage extends Component {
         name='location'
         value={location.newVenue.address}
         onChange={this.handleNewLocationAddressChange}
-        onBlur={handleBlur}
+        onBlur={this.handleTouch}
       />
     )
 
@@ -70,6 +75,7 @@ export class WizardFormLocationPage extends Component {
               options={locationOptions}
               value={location.existingVenue}
               onChange={this.handleLocationDropdownChange}
+              onBlur={this.handleTouch}
             />
           </Form.Field>
         }
@@ -87,7 +93,7 @@ export class WizardFormLocationPage extends Component {
                 name='location'
                 value={location.newVenue.name}
                 onChange={this.handleNewLocationNameChange}
-                onBlur={handleBlur}
+                onBlur={this.handleTouch}
               />
             </Form.Field>
             <Form.Field>
