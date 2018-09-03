@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Input, Message } from 'semantic-ui-react'
+import { Form, Input, Message, Popup, Header, Icon } from 'semantic-ui-react'
 
 export class WizardFormInfoPage extends Component {
   componentWillUnmount () {
@@ -22,15 +22,25 @@ export class WizardFormInfoPage extends Component {
           <Form.Group widths='equal'>
             <Form.Field error={ touched.website && Boolean(errors.website) }>
               <label>Does your event have an online website? If so enter it here</label>
-              <Input
-                icon='globe' iconPosition='left'
-                autoFocus={true} 
-                placeholder='Website'
-                name='website'
-                value={values.website}
-                onChange={handleChange}
-                onBlur={handleBlur}
-              />
+              <Popup
+                flowing
+                trigger={
+                  <Input
+                    icon='globe' iconPosition='left'
+                    autoFocus={true} 
+                    placeholder='Website'
+                    name='website'
+                    value={values.website}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  />
+                }
+                on='focus'
+              >
+                <Header color='yellow' icon='info' content="hint" as='h6' />
+                <p><Icon color='blue' name='globe' />Use this format</p>
+                <p>http(s)://website.whatever</p>
+              </Popup>
             </Form.Field>
             <Form.Field error={ touched.phone_number && Boolean(errors.phone_number) }>
               <label>Is there a phone number potential guests can contact you at?</label>
@@ -58,14 +68,24 @@ export class WizardFormInfoPage extends Component {
             </Form.Field>
             <Form.Field error={ touched.facebook && Boolean(errors.facebook) }>
               <label>Does your event have a Facebook page?</label>
-              <Input
-                icon='facebook' iconPosition='left'
-                placeholder='Facebook'
-                name='facebook'
-                value={values.facebook}
-                onChange={handleChange}
-                onBlur={handleBlur}
-              />
+              <Popup
+                flowing
+                trigger={
+                  <Input
+                    icon='facebook' iconPosition='left'
+                    placeholder='Facebook'
+                    name='facebook'
+                    value={values.facebook}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  />
+                }
+                on='focus'
+              >
+                <Header color='yellow' icon='info' content="hint" as='h6' />
+                <p><Icon color='blue' name='globe' />Use this format</p>
+                <p>http(s)://www.facebook.com/whatever</p>
+              </Popup>
             </Form.Field>
           </Form.Group>
         </div>
