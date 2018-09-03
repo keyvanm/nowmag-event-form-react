@@ -64,6 +64,15 @@ const FormExampleForm = ({
         <WizardFormReviewPage {...form} />        
       }
 
+      <Message error>
+        <Message.Header>Errors</Message.Header>
+        <ul>{
+          Object.keys(errors).filter( key => touched[key]).map( key => (
+            <li key={key}>{errors[key]}</li>
+          ))
+        }</ul>
+      </Message>
+
       { 
         status === 'error' &&
         <Message error visible icon='warning' className='wizard-message'
