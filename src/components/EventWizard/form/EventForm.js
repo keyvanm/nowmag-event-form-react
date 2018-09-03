@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, Message } from 'semantic-ui-react'
+import { Form, Message, Button } from 'semantic-ui-react'
 
 import FormButtonGroup from './FormButtonGroup';
 import WizardFormAddPage from './pages/WizardFormAddPage';
@@ -19,9 +19,9 @@ const FormExampleForm = ({
 }) => {
   const { status, errors, touched } = form;
   const buttonAbility = {
-    back: !status && currentStep !== 1,
-    next: status || (currentStep < lastStep),
-    submit: Object.keys(errors).length === 0 && !status && currentStep === lastStep
+    back: currentStep !== 1,
+    next: currentStep < lastStep,
+    submit: Object.keys(errors).length === 0 && currentStep === lastStep
   }
 
   const onKeyPress = (event) => {
@@ -36,41 +36,50 @@ const FormExampleForm = ({
   return (
     <Form
       onKeyPress={onKeyPress} onSubmit={buttonHandlers.handleEnterBtn}
-      success={status}
+      success={status === 'success'}
       error={Object.keys(errors).filter( key => touched[key]).length > 0}
     >
       <Message success icon='check' className='wizard-message'
         content="Event successfully created! Click next"
       />
-      <Message error>
-        <ul>{
-          Object.keys(errors).filter( key => touched[key]).map( key => (
-            <li key={key}>{errors[key]}</li>
-          ))
-        }</ul>
-      </Message>
+
       {
-        !status && currentStep === 1 &&
+        status !== 'success' && currentStep === 1 &&
         <WizardFormAddPage {...form} />        
       }
       {
-        !status && currentStep === 2 &&
+        status !== 'success' && currentStep === 2 &&
         <WizardFormLocationPage {...form} />
       }
       {
-        !status && currentStep === 3 &&
+        status !== 'success' && currentStep === 3 &&
         <WizardFormDatePage {...form} />        
       }
       {
-        !status && currentStep === 4 &&
+        status !== 'success' && currentStep === 4 &&
         <WizardFormInfoPage {...form} />        
       }
       {
-        !status && currentStep === 5 &&
+        status !== 'success' && currentStep === 5 &&
         <WizardFormReviewPage {...form} />        
       }
 
-      <FormButtonGroup loading={form.isSubmitting} buttonAbility={buttonAbility} buttonHandlers={buttonHandlers} />
+      { 
+        status === 'error' &&
+        <Message error visible icon='warning' className='wizard-message'
+          content="There was an error creating the event. Please review the entries and try again. If the problem continues contact info@bluh.com."
+        />
+      }
+      {
+        status !== 'success' &&
+        <FormButtonGroup loading={form.isSubmitting} buttonAbility={buttonAbility} buttonHandlers={buttonHandlers} />
+      }
+      {
+        status === 'success' &&
+        <Button primary>Next</Button>
+      }
+      
+      
 
     </Form>
   )

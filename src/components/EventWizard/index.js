@@ -106,7 +106,7 @@ export default withFormik({
   ) => {
     console.log(values);
     setTimeout(() => {
-      setStatus(true)
+      setStatus('success')
       setSubmitting(false);
     }, 2000);
   },

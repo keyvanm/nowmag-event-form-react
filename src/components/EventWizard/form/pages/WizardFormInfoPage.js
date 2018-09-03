@@ -27,7 +27,7 @@ export class WizardFormInfoPage extends Component {
                 trigger={
                   <Input
                     icon='globe' iconPosition='left'
-                    autoFocus={true} 
+                    // autoFocus={true} 
                     placeholder='Website'
                     name='website'
                     value={values.website}
