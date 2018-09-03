@@ -14,13 +14,13 @@ export default class EventReviewCard extends Component {
         </p>
         <p>
           <span>
-            <Icon name='clock' /> { values.start.format('MMMM Do YYYY, h:mm a') }
+            <Icon name='clock' /> { isMoment(values.start) && values.start.format('MMMM Do YYYY, h:mm a') }
           </span>
           { ' ' }
           {
             values.end && isMoment(values.end) &&
             <span>
-              <Icon name='clock' /> { values.start.format('MMMM Do YYYY, h:mm a') }
+              <Icon name='clock' /> { values.end.format('MMMM Do YYYY, h:mm a') }
             </span>
           }
         </p>
