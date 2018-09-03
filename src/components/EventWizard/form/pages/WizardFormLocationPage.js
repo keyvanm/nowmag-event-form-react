@@ -15,13 +15,13 @@ export class WizardFormLocationPage extends Component {
   }
 
   setFieldValue = (field, value) => {
-    this.handleTouch();
     const { values: { location } } = this.props;
     const newLocation = { ...location, [field]: value }
     this.props.setFieldValue('location', newLocation)
   }
 
   handleLocationDropdownChange = (event, data) => {
+    // this.handleTouch();
     console.log(data);
     this.setFieldValue('existingVenue', data.value)
   }
@@ -52,20 +52,10 @@ export class WizardFormLocationPage extends Component {
       handleBlur,
     } = this.props;
 
-    const AddressInput = () => (
-      <Input
-        icon='location arrow' iconPosition='left' placeholder='Address (e.g. 301 Front St W, Toronto, ON M5V 2T6)'
-        name='location'
-        value={location.newVenue.address}
-        onChange={this.handleNewLocationAddressChange}
-        onBlur={this.handleTouch}
-      />
-    )
-
     return (
       <div className="wizard-page">
         { !location.isNewVenue && 
-          <Form.Field>
+          <Form.Field error={ touched.location && errors.location }>
             <label>Where is your event located?</label>
             <Dropdown
               fluid search selection
@@ -85,7 +75,7 @@ export class WizardFormLocationPage extends Component {
         </Form.Field>
         { location.isNewVenue && 
           <div>
-            <Form.Field>
+            <Form.Field error={ touched.location && errors.location }>
               <label>Enter the location details manually</label>
               <Input
                 icon='home' iconPosition='left'
@@ -96,10 +86,18 @@ export class WizardFormLocationPage extends Component {
                 onBlur={this.handleTouch}
               />
             </Form.Field>
-            <Form.Field>
+            <Form.Field error={ touched.location && errors.location }>
               <Popup
                 flowing
-                trigger={<AddressInput />}
+                trigger={
+                  <Input
+                    icon='location arrow' iconPosition='left' placeholder='Address (e.g. 301 Front St W, Toronto, ON M5V 2T6)'
+                    name='location'
+                    value={location.newVenue.address}
+                    onChange={this.handleNewLocationAddressChange}
+                    onBlur={this.handleTouch}
+                  />
+                }
                 on='focus'
               >
                 <Header color='yellow' icon='info' content="hint" as='h6' />

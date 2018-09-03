@@ -21,7 +21,7 @@ const FormExampleForm = ({
   const buttonAbility = {
     back: !status && currentStep !== 1,
     next: status || (currentStep < lastStep),
-    submit: !status && currentStep === lastStep
+    submit: Object.keys(form.errors).length === 0 && !status && currentStep === lastStep
   }
 
   const onKeyPress = (event) => {

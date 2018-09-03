@@ -36,7 +36,7 @@ export class WizardFormAddPage extends Component {
               }
             </Item.Group>
           </Message> */}
-          <Form.Field required>
+          <Form.Field required error={ touched.name && errors.name }>
             <label>What is the title of your event?</label>
             <Input
               autoFocus={true}
@@ -47,7 +47,7 @@ export class WizardFormAddPage extends Component {
               onBlur={handleBlur}
             />
           </Form.Field>
-          <Form.Field required>
+          <Form.Field required error={ touched.category && errors.category }>
             <label>Which of these categories best describe your event?</label>
             <Select
               placeholder='Category'
@@ -58,7 +58,7 @@ export class WizardFormAddPage extends Component {
               onBlur={handleBlur}
             />
           </Form.Field>
-          <Form.Field required>
+          <Form.Field required error={ touched.description && errors.description }>
             <label>Describe your event in a few sentences</label>
             <TextArea
               autoHeight
