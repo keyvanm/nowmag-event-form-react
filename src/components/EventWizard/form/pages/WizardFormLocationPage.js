@@ -93,7 +93,7 @@ export class WizardFormLocationPage extends Component {
                 flowing
                 trigger={
                   <Input
-                    icon='location arrow' iconPosition='left' placeholder='Address (e.g. 301 Front St W, Toronto, ON M5V 2T6)'
+                    icon='marker' iconPosition='left' placeholder='Address (e.g. 301 Front St W, Toronto, ON M5V 2T6)'
                     name='location'
                     value={location.newVenue.address}
                     onChange={this.handleNewLocationAddressChange}
@@ -103,7 +103,7 @@ export class WizardFormLocationPage extends Component {
                 on='focus'
               >
                 <Header color='yellow' icon='info' content="hint" as='h6' />
-                <p><Icon color='blue' name='location arrow' />Use this format</p>
+                <p><Icon color='blue' name='marker' />Use this format</p>
                 <p><em>301 Front St W, Toronto, ON M5V 2T6</em></p>
               </Popup>
             </Form.Field>

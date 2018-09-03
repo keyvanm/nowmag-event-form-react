@@ -26,7 +26,7 @@ export class WizardFormInfoPage extends Component {
                 flowing
                 trigger={
                   <Input
-                    icon='globe' iconPosition='left'
+                    icon='linkify' iconPosition='left'
                     // autoFocus={true} 
                     placeholder='Website'
                     name='website'
