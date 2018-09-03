@@ -1,3 +1,4 @@
+import React from 'react'
 import * as yup from 'yup';
 
 export const eventSchema = /*yup.object*/({
@@ -24,15 +25,15 @@ export default (values, props) => {
   let errors = {}
 
   if (!eventSchema.name.isValidSync(values.name)) {
-    errors.name = "Please provide your event title"
+    errors.name = <p>Please provide your event <b>title</b></p>
   }
   if (!eventSchema.category.isValidSync(values.category)) {
-    errors.category = "Please pick a category for your event"
+    errors.category = <p>Please pick a <b>category</b> for your event</p>
   }
   if (!yup.string().required().isValidSync(values.description)) {
-    errors.description = "Please write a description for your event"
+    errors.description = <p>Please write a <b>description</b> for your event</p>
   } else if (!yup.string().max(400).isValidSync(values.description)) {
-    errors.description = "Please keep the description under 400 characters"
+    errors.description = <p>Please keep the <b>description</b> under 400 characters></p>
   }
 
   if (values.location.isNewVenue) {
