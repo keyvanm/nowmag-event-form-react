@@ -21,7 +21,7 @@ const FormExampleForm = ({
   const buttonAbility = {
     back: !status && currentStep !== 1,
     next: status || (currentStep < lastStep),
-    submit: Object.keys(form.errors).length === 0 && !status && currentStep === lastStep
+    submit: Object.keys(errors).length === 0 && !status && currentStep === lastStep
   }
 
   const onKeyPress = (event) => {
@@ -31,24 +31,19 @@ const FormExampleForm = ({
     }
   }
 
-  console.log("//// NEW RENDER ////")
-  console.log(form.errors)
-  console.log(form.touched)
-  console.log("//// DONE ////")
-
   return (
     <Form
       onKeyPress={onKeyPress} onSubmit={buttonHandlers.handleEnterBtn}
       success={status}
-      error={Object.keys(form.errors).filter( key => form.touched[key]).length > 0}
+      error={Object.keys(errors).filter( key => form.touched[key]).length > 0}
     >
       <Message success icon='check' className='wizard-message'
         content="Event successfully created! Click next"
       />
       <Message error>
         <ul>{
-          Object.keys(form.errors).filter( key => form.touched[key]).map( key => (
-            <li key={key}>{form.errors[key]}</li>
+          Object.keys(errors).filter( key => form.touched[key]).map( key => (
+            <li key={key}>{errors[key]}</li>
           ))
         }</ul>
       </Message>

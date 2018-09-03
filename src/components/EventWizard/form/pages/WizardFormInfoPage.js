@@ -20,7 +20,7 @@ export class WizardFormInfoPage extends Component {
           <Message info icon='info'
             content="Please note that at least one of the following is needed" />
           <Form.Group widths='equal'>
-            <Form.Field error={ touched.website && errors.website }>
+            <Form.Field error={ touched.website && Boolean(errors.website) }>
               <label>Does your event have an online website? If so enter it here</label>
               <Input
                 icon='globe' iconPosition='left'
@@ -32,7 +32,7 @@ export class WizardFormInfoPage extends Component {
                 onBlur={handleBlur}
               />
             </Form.Field>
-            <Form.Field error={ touched.phone_number && errors.phone_number }>
+            <Form.Field error={ touched.phone_number && Boolean(errors.phone_number) }>
               <label>Is there a phone number potential guests can contact you at?</label>
               <Input
                 icon='phone' iconPosition='left'
@@ -45,7 +45,7 @@ export class WizardFormInfoPage extends Component {
             </Form.Field>
           </Form.Group>
           <Form.Group widths='equal'>
-            <Form.Field error={ touched.email && errors.email }>
+            <Form.Field error={ touched.email && Boolean(errors.email) }>
               <label>Is there an email potential guests can contact you at?</label>
               <Input
                 icon='mail' iconPosition='left'
@@ -56,7 +56,7 @@ export class WizardFormInfoPage extends Component {
                 onBlur={handleBlur}
               />
             </Form.Field>
-            <Form.Field error={ touched.facebook && errors.facebook }>
+            <Form.Field error={ touched.facebook && Boolean(errors.facebook) }>
               <label>Does your event have a Facebook page?</label>
               <Input
                 icon='facebook' iconPosition='left'

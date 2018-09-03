@@ -26,7 +26,7 @@ export class WizardFormDatePage extends Component {
     return (
       <div className="wizard-page">
           <Form.Group widths='equal'>
-            <Form.Field required error={ touched.start && errors.start }>
+            <Form.Field required error={ touched.start && Boolean(errors.start) }>
               <label>When does your event start?</label>
               <DatePicker
                 showTimeSelect
@@ -41,7 +41,7 @@ export class WizardFormDatePage extends Component {
                 onBlur={handleBlur}
               />
             </Form.Field>
-            <Form.Field error={ touched.end && errors.end }>
+            <Form.Field error={ touched.end && Boolean(errors.end) }>
               <label>When does your event end? (Optional)</label>
               <DatePicker
                 showTimeSelect

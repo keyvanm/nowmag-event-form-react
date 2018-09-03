@@ -4,7 +4,7 @@ import { withFormik } from 'formik';
 import Steps from './Steps';
 import { stepsArray } from '../../consts/steps';
 import EventForm from './form/EventForm';
-import validate, { eventSchema } from './form/validate'
+import validate from './form/validate'
 
 import './index.css';
 
@@ -94,7 +94,6 @@ export default withFormik({
     facebook: '',
     contactEmail: ''
   }),
-  // validationSchema: eventSchema,
   validate,
   handleSubmit: (
     values,

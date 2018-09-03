@@ -1,24 +1,5 @@
 import * as yup from 'yup';
 
-const example = {
-  name: '',
-  category: '',
-  description: '',
-  location: {
-    isNewVenue: false,
-    existingVenue: '',
-    newVenue: { name: '', address: '' },
-  },
-  start: null,
-  end: null,
-  website: '',
-  phone_number: '',
-  email: '',
-  facebook: '',
-  contactEmail: ''
-}
-
-
 export const eventSchema = /*yup.object*/({
   name: yup.string().required(),
   category: yup
@@ -33,7 +14,7 @@ export const eventSchema = /*yup.object*/({
   start: yup.date().required(),
   end: yup.date(),
   website: yup.string().url(),
-  phone_number: '',  
+  phone_number: yup.string(),  
   facebook: yup.string().url(),
   email: yup.string().email(),
   contact_email: yup.string().email().required(),
@@ -69,7 +50,7 @@ export default (values, props) => {
 
   if (!eventSchema.start.isValidSync(values.start)) {
     errors.start = "Please provide a valid start date and time for your event"
-  } else if (!eventSchema.end.isValidSync(values.end)) {
+  } else if (values.end && !eventSchema.end.isValidSync(values.end)) {
     errors.end = "Please provide a valid end date and time for your event, or remove it entirely"
   } else if (values.end && values.end.isBefore(values.start)) {
     errors.end = "End date cannot be before start date"
@@ -77,6 +58,18 @@ export default (values, props) => {
   const { website, phone_number, email, facebook } = values;
   if (!(website || phone_number || email || facebook)) {
     errors.website = "At least one of the website, phone number, email or facebook is needed"
+  }
+  if (website && !eventSchema.website.isValidSync(website)) {
+    errors.website = "Please make sure the website url is formatted like http(s)://..."
+  }
+  if (phone_number && !eventSchema.phone_number.isValidSync(phone_number)) {
+    errors.phone_number = "Please format the phone number like so"
+  }
+  if (email && !eventSchema.email.isValidSync(email)) {
+    errors.email = "Please format the email"
+  }
+  if (facebook && !eventSchema.facebook.isValidSync(facebook)) {
+    errors.facebook = "Please format the facebook page like so"
   }
   return errors;
 }

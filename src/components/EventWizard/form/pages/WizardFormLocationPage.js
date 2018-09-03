@@ -52,13 +52,12 @@ export class WizardFormLocationPage extends Component {
       values: { location },
       errors,
       touched,
-      handleBlur,
     } = this.props;
 
     return (
       <div className="wizard-page">
         { !location.isNewVenue && 
-          <Form.Field error={ touched.location && errors.location }>
+          <Form.Field error={ touched.location && Boolean(errors.location) }>
             <label>Where is your event located?</label>
             <Dropdown
               fluid search selection
@@ -78,7 +77,7 @@ export class WizardFormLocationPage extends Component {
         </Form.Field>
         { location.isNewVenue && 
           <div>
-            <Form.Field error={ touched.location && errors.location }>
+            <Form.Field error={ touched.location && Boolean(errors.location) }>
               <label>Enter the location details manually</label>
               <Input
                 icon='home' iconPosition='left'
@@ -89,7 +88,7 @@ export class WizardFormLocationPage extends Component {
                 onBlur={this.handleTouch}
               />
             </Form.Field>
-            <Form.Field error={ touched.location && errors.location }>
+            <Form.Field error={ touched.location && Boolean(errors.location) }>
               <Popup
                 flowing
                 trigger={
