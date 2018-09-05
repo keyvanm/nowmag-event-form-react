@@ -2,7 +2,9 @@
   "name": "nowmag-event-form-react",
   "version": "0.1.0",
   "private": true,
+  "proxy": "https://127.0.0.1:8000",
   "dependencies": {
+    "axios": "^0.18.0",
     "formik": "^1.1.1",
     "moment": "^2.22.2",
     "react": "^16.4.2",

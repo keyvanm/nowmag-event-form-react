@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withFormik } from 'formik';
+import axios from 'axios';
 
 import Steps from './Steps';
 import { stepsArray } from '../../consts/steps';
@@ -76,7 +77,6 @@ export class EventWizard extends Component {
 }
 
 export default withFormik({
-  status: null,
   mapPropsToValues: props => ({
     name: '',
     category: '',
@@ -105,9 +105,14 @@ export default withFormik({
     }
   ) => {
     console.log(values);
-    setTimeout(() => {
-      setStatus('success')
-      setSubmitting(false);
-    }, 2000);
+    axios.post("/api/v1/events", values)
+      .then((data) => {
+        setStatus({ submissionStatus: 'success', data })
+        setSubmitting(false);
+      }, 2000)
+      .catch((error) => {
+        setStatus({ submissionStatus: 'error', error })
+        setSubmitting(false);
+      });
   },
 })(EventWizard);
