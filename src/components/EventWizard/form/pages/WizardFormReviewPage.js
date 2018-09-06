@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { Form, Input, Message, Segment, Header } from 'semantic-ui-react'
+import { Form, Input, Message, Header } from 'semantic-ui-react'
 import EventReviewCard from '../EventReviewCard';
 
 
 export class WizardFormReviewPage extends Component {
   componentWillUnmount () {
-    this.props.setTouched({ ...this.props.touched, contactEmail: true });
+    this.props.setTouched({ ...this.props.touched, owner_email: true });
   }
 
   render() {
@@ -17,9 +17,6 @@ export class WizardFormReviewPage extends Component {
       handleBlur,
     } = this.props;
 
-    console.log(touched.contactEmail);
-    console.log(errors);
-
     return (
       <div className="wizard-page">
         <Message warning visible icon='warning'
@@ -29,18 +26,19 @@ export class WizardFormReviewPage extends Component {
         <Header>Review your event</Header>
         <EventReviewCard values={values} />
 
-        <Form.Field error={ touched.contactEmail && Boolean(errors.contactEmail) }>
+        <Form.Field error={ touched.owner_email && Boolean(errors.owner_email) }>
           <label>What is an email we (NOW Toronto) can contact you at?</label>
           <Input
+            type='email'
             autoFocus={true}
             icon='mail' iconPosition='left'
             placeholder='Contact email'
-            name='contactEmail'
-            value={values.contactEmail}
+            name='owner_emails'
+            value={values.owner_emails}
             onChange={handleChange}
             onBlur={handleBlur}
           />
-        </Form.Field>  
+        </Form.Field>
       </div>
     );
   }

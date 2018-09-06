@@ -92,7 +92,7 @@ export default withFormik({
     phone_number: '',
     email: '',
     facebook: '',
-    contactEmail: ''
+    owner_email: ''
   }),
   validate,
   handleSubmit: (
@@ -104,8 +104,7 @@ export default withFormik({
       setStatus,
     }
   ) => {
-    console.log(values);
-    axios.post("/api/v1/events", values)
+    axios.post("/api/v1/events/", values)
       .then((data) => {
         setStatus({ submissionStatus: 'success', data })
         setSubmitting(false);

@@ -25,7 +25,6 @@ export class WizardFormLocationPage extends Component {
 
   handleLocationDropdownChange = (event, data) => {
     // this.handleTouch();
-    console.log(data);
     this.setFieldValue('existingVenue', data.value)
   }
 
@@ -56,12 +55,12 @@ export class WizardFormLocationPage extends Component {
 
     return (
       <div className="wizard-page">
-        { !location.isNewVenue && 
+        { !location.isNewVenue &&
           <Form.Field error={ touched.location && Boolean(errors.location) }>
             <label>Where is your event located?</label>
             <Dropdown
               fluid search selection
-              autoFocus={true} 
+              autoFocus={true}
               placeholder='Location'
               name='location'
               options={locationOptions}
@@ -75,7 +74,7 @@ export class WizardFormLocationPage extends Component {
         <Form.Field>
           <Radio toggle label="I couldn't find the venue on the above list" onChange={this.handleNewLocationToggle} />
         </Form.Field>
-        { location.isNewVenue && 
+        { location.isNewVenue &&
           <div>
             <Form.Field error={ touched.location && Boolean(errors.location) }>
               <label>Enter the location details manually</label>

@@ -27,7 +27,6 @@ export class WizardFormAddPage extends Component {
   }
 
   handleCategoryChange = (event, data) => {
-    console.log(data);
     this.props.setFieldValue('category', data.value)
   }
 
