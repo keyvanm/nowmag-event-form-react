@@ -85,11 +85,13 @@ export default class EventForm extends Component {
           <div className="wizard-server-messages">
             <Message error visible icon className='wizard-message'>
               <Icon name='warning' />
-              <Header>Submission error</Header>
-              <p>
-                There was an error creating the event. Please review the entries and try again.
-                If the problem continues contact info@bluh.com.
-              </p>
+              <Message.Content>
+                <Header>Submission error</Header>
+                <p>
+                  There was an error creating the event. Please review the entries and try again.
+                  If the problem continues contact info@bluh.com.
+                </p>
+              </Message.Content>
             </Message>
             <Message error visible className='wizard-message'>
               <Header>Errors</Header>

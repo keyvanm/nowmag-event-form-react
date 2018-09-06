@@ -33,8 +33,8 @@ export class WizardFormReviewPage extends Component {
             autoFocus={true}
             icon='mail' iconPosition='left'
             placeholder='Contact email'
-            name='owner_emails'
-            value={values.owner_emails}
+            name='owner_email'
+            value={values.owner_email}
             onChange={handleChange}
             onBlur={handleBlur}
           />
