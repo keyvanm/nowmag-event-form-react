@@ -1,15 +1,27 @@
 import React, { Component } from 'react';
 import { Form, Input, Dropdown, Divider, Radio, Popup, Header, Icon } from 'semantic-ui-react'
+import axios from 'axios';
 
-const locationOptions = [
-  {
-    'text': "Here and Now",
-    'key': '0-0-0-0', // uuid
-    'value': '0-0-0-0', // uuid
-  }
-]
 
 export class WizardFormLocationPage extends Component {
+  state = {
+    locationOptions: []
+  }
+
+  fetchLocations = ({ searchQuery }) => {
+    if (searchQuery.length > 2) {
+      axios.get("/api/v1/locations/", {
+        params: { q: searchQuery }
+      }).then( ({ data }) => {
+        const locationOptions = data.map( ({ name, address, uuid }) => {
+          const text = `${name} (${address})`
+          return { text, key: uuid, value: uuid };
+        });
+        this.setState({ locationOptions })
+      });
+    }
+  }
+
   componentWillUnmount () {
     this.handleTouch();
   }
@@ -63,8 +75,9 @@ export class WizardFormLocationPage extends Component {
               autoFocus={true}
               placeholder='Location'
               name='location'
-              options={locationOptions}
+              options={this.state.locationOptions}
               value={location.existingVenue}
+              onSearchChange={ (e, d) => this.fetchLocations(d)}
               onChange={this.handleLocationDropdownChange}
               onBlur={this.handleTouch}
             />
