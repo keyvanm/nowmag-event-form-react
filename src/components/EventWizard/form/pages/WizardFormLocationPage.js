@@ -3,9 +3,24 @@ import { Form, Input, Dropdown, Divider, Radio, Popup, Header, Icon } from 'sema
 import axios from 'axios';
 
 
+const convertAPILocationToDropdownItem = ({ name, address, uuid }) => (
+  { text: `${name} (${address})`, key: uuid, value: uuid }
+)
+
+
 export class WizardFormLocationPage extends Component {
   state = {
     locationOptions: []
+  }
+
+  componentWillMount() {
+    const { location } = this.props.values;
+    if (!location.isNewVenue && location.existingVenue) {
+      axios.get(`/api/v1/locations/${location.existingVenue}/`).then(({ data }) => {
+        const locationOption = convertAPILocationToDropdownItem(data);
+        this.setState({ locationOptions: [ locationOption ] });
+      })
+    }
   }
 
   fetchLocations = ({ searchQuery }) => {
@@ -13,10 +28,7 @@ export class WizardFormLocationPage extends Component {
       axios.get("/api/v1/locations/", {
         params: { q: searchQuery }
       }).then( ({ data }) => {
-        const locationOptions = data.map( ({ name, address, uuid }) => {
-          const text = `${name} (${address})`
-          return { text, key: uuid, value: uuid };
-        });
+        const locationOptions = data.map(convertAPILocationToDropdownItem);
         this.setState({ locationOptions })
       });
     }
