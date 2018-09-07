@@ -97,7 +97,6 @@ export class WizardFormLocationPage extends Component {
                 name='location'
                 value={location.newVenue.name}
                 onChange={this.handleNewLocationNameChange}
-                onBlur={this.handleTouch}
               />
             </Form.Field>
             <Form.Field error={ touched.location && Boolean(errors.location) }>
@@ -109,7 +108,6 @@ export class WizardFormLocationPage extends Component {
                     name='location'
                     value={location.newVenue.address}
                     onChange={this.handleNewLocationAddressChange}
-                    onBlur={this.handleTouch}
                   />
                 }
                 on='focus'

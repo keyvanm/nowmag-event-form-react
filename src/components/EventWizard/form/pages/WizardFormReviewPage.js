@@ -31,6 +31,7 @@ export class WizardFormReviewPage extends Component {
           <Input
             type='email'
             autoFocus={true}
+            autoComplete="email"
             icon='mail' iconPosition='left'
             placeholder='Contact email'
             name='owner_email'
