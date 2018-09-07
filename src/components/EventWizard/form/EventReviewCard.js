@@ -1,6 +1,34 @@
 import React, { Component } from 'react'
 import { Segment, Header, Label, Icon, List } from 'semantic-ui-react'
 import { isMoment } from 'moment';
+import axios from 'axios';
+
+
+class LocationComponent extends Component {
+  state = {
+    name: "",
+    address: "",
+  }
+  componentWillMount() {
+    const { location } = this.props;
+    if (!location.isNewVenue && location.existingVenue) {
+      axios.get(`/api/v1/locations/${location.existingVenue}/`).then(({ data }) => {
+        this.setState({ ...data })
+      })
+    } else {
+      this.setState({ ...location.newVenue })
+    }
+  }
+  render() {
+    return (
+      <div>
+        <Icon name='marker' />
+        <span>{ this.state.name } ({ this.state.address })</span>
+      </div>
+    )
+  }
+}
+
 
 export default class EventReviewCard extends Component {
   render() {
@@ -9,10 +37,10 @@ export default class EventReviewCard extends Component {
     return (
       <Segment>
         <Header>{ values.name }</Header>
-        <p>
-          <Icon name='marker' /> { values.location.existingVenue }
-        </p>
-        <p>
+        <div>
+          <LocationComponent location={values.location} />
+        </div>
+        <div>
           <span>
             <Icon name='clock' /> { isMoment(values.start) && values.start.format('MMMM Do YYYY, h:mm a') }
           </span>
@@ -23,7 +51,7 @@ export default class EventReviewCard extends Component {
               <Icon name='clock' /> { values.end.format('MMMM Do YYYY, h:mm a') }
             </span>
           }
-        </p>
+        </div>
         <Segment raised>{ values.description }</Segment>
         <Label tag content={values.category} />
 
@@ -49,7 +77,7 @@ export default class EventReviewCard extends Component {
             }
           </List>
         </div>
-        
+
       </Segment>
     )
   }
