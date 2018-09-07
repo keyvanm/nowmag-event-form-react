@@ -18,12 +18,12 @@ export class WizardFormAddPage extends Component {
     })
   }
 
-  componentWillUnmount () {
-    this.props.setTouched({ ...this.props.touched, name: true, category: true, description: true });
-  }
-
   componentWillMount () {
     this.fetchCategories();
+  }
+
+  componentWillUnmount () {
+    this.props.setTouched({ ...this.props.touched, name: true, category: true, description: true });
   }
 
   handleCategoryChange = (event, data) => {
