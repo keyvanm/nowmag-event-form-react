@@ -29,6 +29,27 @@ class LocationComponent extends Component {
   }
 }
 
+class CategoryComponent extends Component {
+  state = {
+    name: "",
+    price: "",
+  }
+
+  componentWillMount() {
+    const { category } = this.props;
+
+    axios.get(`/api/v1/event-categories/${category}/`).then(({ data }) => {
+      this.setState({ ...data })
+    })
+
+  }
+  render() {
+    return (
+      <Label tag content={`${this.state.name} ($${ this.state.price })`} />
+    )
+  }
+}
+
 
 export default class EventReviewCard extends Component {
   render() {
@@ -53,7 +74,7 @@ export default class EventReviewCard extends Component {
           }
         </div>
         <Segment raised>{ values.description }</Segment>
-        <Label tag content={values.category} />
+        <CategoryComponent category={values.category} />
 
         <div>
           <List horizontal>
