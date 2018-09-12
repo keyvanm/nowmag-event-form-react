@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Container } from 'semantic-ui-react';
-import { Switch, Route, Redirect } from 'react-router';
+import { Switch, Route } from 'react-router';
 
 import EventWizard from './components/EventWizard'
 import EventPromoter from './components/EventPromoter'
