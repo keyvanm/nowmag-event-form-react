@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import axios from 'axios';
-import { Header, Step, Grid, List, Checkbox } from 'semantic-ui-react'
+import { Header, Step, Grid, List, Checkbox, Button, Icon } from 'semantic-ui-react'
 
 import EventReviewCard from '../EventWizard/form/EventReviewCard';
 
@@ -81,10 +81,10 @@ class PromotePage extends Component {
     return (
       <div>
         <Step.Group items={stepsArray} attached='top' widths={stepsArray.length} unstackable/>
-        <Header>Promote your event</Header>
+        <Header as='h1'>Promote your event</Header>
         {
           event && promotions &&
-          <Grid>
+          <Grid celled='internally'>
             <Grid.Column width={12}>
               <List>
                 {
@@ -107,7 +107,30 @@ class PromotePage extends Component {
               </List>
             </Grid.Column>
             <Grid.Column width={4}>
-              ${this.totalPrice()}
+              <Header icon='cart' content="Cart" />
+              <List divided>
+                {
+                  isPaidCategory(event) &&
+                  <List.Item>
+                    Promoted category
+                    {pricableFormatter(event.category)}
+                  </List.Item>
+                }
+                {
+                  promotions.filter( item => checked[item.id]).map( item => (
+                    <List.Item key={item.id}>
+                      {pricableFormatter(item)}
+                    </List.Item>
+                  ))
+                }
+              </List>
+
+              <Button animated='vertical'>
+                <Button.Content hidden>Checkout</Button.Content>
+                <Button.Content visible>
+                  <Icon name='shop' /> ${this.totalPrice()}
+                </Button.Content>
+              </Button>
             </Grid.Column>
           </Grid>
         }
