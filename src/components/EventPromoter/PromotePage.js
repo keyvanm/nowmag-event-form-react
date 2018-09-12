@@ -75,6 +75,12 @@ class PromotePage extends Component {
     return total;
   }
 
+  onCheckout = () => {
+    const { checked } = this.state;
+    const data = Object.keys(checked).filter( id => checked[id])
+    console.log(data);
+  }
+
   render() {
     const { event, promotions, checked } = this.state;
 
@@ -125,7 +131,7 @@ class PromotePage extends Component {
                 }
               </List>
 
-              <Button animated='vertical'>
+              <Button animated='vertical' onClick={this.onCheckout}>
                 <Button.Content hidden>Checkout</Button.Content>
                 <Button.Content visible>
                   <Icon name='shop' /> ${this.totalPrice()}
