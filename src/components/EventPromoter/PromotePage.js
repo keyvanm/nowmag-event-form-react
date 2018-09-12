@@ -37,7 +37,7 @@ function isPaidCategory(event) {
 }
 
 function pricableFormatter({ name, price }) {
-  return parseFloat(price) > 0 ? `${name} ($${price})` : name
+  return parseFloat(price) > 0 ? `${name} ($${price})` : `${name} (FREE!)`
 }
 
 class PromotePage extends Component {
@@ -53,9 +53,9 @@ class PromotePage extends Component {
     });
     axios.get(`/api/v1/event-promotions/`).then(({data}) => {
       const { checked } = this.state;
-      data.map(item => {
-        checked[item.id] = false;
-      })
+      for (let item of data) {
+        checked[item.sku_id] = false;
+      }
       this.setState({ promotions: data, checked });
     });
   }
@@ -68,7 +68,7 @@ class PromotePage extends Component {
       total += parseFloat(event.category.price)
     }
     for (var item of promotions) {
-      if (checked[item.id]) {
+      if (checked[item.sku_id]) {
         total += parseFloat(item.price)
       }
     }
@@ -78,7 +78,11 @@ class PromotePage extends Component {
   onCheckout = () => {
     const { checked } = this.state;
     const data = Object.keys(checked).filter( id => checked[id])
-    console.log(data);
+    const eventUUID = this.props.match.params.eventUUID;
+    axios.post(`/api/v1/events/${eventUUID}/create_invoice/`, data).then(() => {
+      const eventUUID = this.props.match.params.eventUUID;
+      this.props.history.push(`/events/${eventUUID}/checkout/`);
+    });
   }
 
   render() {
@@ -94,18 +98,17 @@ class PromotePage extends Component {
             <Grid.Column width={12}>
               <List>
                 {
-                  isPaidCategory(event) &&
                   <List.Item>
                     <Checkbox label={pricableFormatter(event.category)} defaultChecked disabled />
                   </List.Item>
                 }
                 {
                   promotions.map( item => (
-                    <List.Item key={item.id}>
+                    <List.Item key={item.sku_id}>
                       <Checkbox
                         label={pricableFormatter(item)}
-                        checked={checked[item.id]}
-                        onChange={(e, {checked}) => { this.setState({ checked: { ...this.state.checked, [item.id]: checked } })}}
+                        checked={checked[item.sku_id]}
+                        onChange={(e, {checked}) => { this.setState({ checked: { ...this.state.checked, [item.sku_id]: checked } })}}
                       />
                     </List.Item>
                   ))
@@ -115,16 +118,15 @@ class PromotePage extends Component {
             <Grid.Column width={4}>
               <Header icon='cart' content="Cart" />
               <List divided>
+                <List.Item>
+                  Category
+                  { isPaidCategory(event) && <span>Promoted category</span> }
+                  {pricableFormatter(event.category)}
+                </List.Item>
+
                 {
-                  isPaidCategory(event) &&
-                  <List.Item>
-                    Promoted category
-                    {pricableFormatter(event.category)}
-                  </List.Item>
-                }
-                {
-                  promotions.filter( item => checked[item.id]).map( item => (
-                    <List.Item key={item.id}>
+                  promotions.filter( item => checked[item.sku_id]).map( item => (
+                    <List.Item key={item.sku_id}>
                       {pricableFormatter(item)}
                     </List.Item>
                   ))
