@@ -47,7 +47,7 @@ export default class EventForm extends Component {
         error={Object.keys(errors).filter( key => touched[key]).length > 0}
       >
         <Message success icon='check' className='wizard-message'
-          content="Event successfully created! Click next"
+          content="Awesome Click next"
         />
 
         {

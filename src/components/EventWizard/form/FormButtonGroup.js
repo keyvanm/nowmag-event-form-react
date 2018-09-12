@@ -72,9 +72,12 @@ export default class FormButtonGroup extends Component {
           {
             back && <Button loading={loading} disabled={loading} onClick={handleBackBtn}>Back</Button>
           }
-          <Button loading={loading} disabled={loading || !next} onClick={handleNextBtn} primary>Next</Button>
-
-          <Button loading={loading} disabled={loading || !submit} positive type='submit'>Create Event</Button>
+          {
+            next && <Button loading={loading} disabled={loading || !next} onClick={handleNextBtn} primary>Next</Button>
+          }
+          {
+            submit && <Button loading={loading} disabled={loading || !submit} positive type='submit'>Promote event</Button>
+          }
         </div>
       </div>
     )

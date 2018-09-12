@@ -4,7 +4,11 @@ import axios from 'axios';
 
 
 const convertAPILocationToDropdownItem = ({ name, address, uuid }) => (
-  { text: `${name} (${address})`, key: uuid, value: uuid }
+  {
+    text: address ? `${name} (${address})` : name,
+    key: uuid,
+    value: uuid
+  }
 )
 
 

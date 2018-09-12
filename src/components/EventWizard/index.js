@@ -108,7 +108,8 @@ export default withFormik({
       .then((data) => {
         setStatus({ submissionStatus: 'success', data })
         setSubmitting(false);
-      }, 2000)
+        props.history.push(`/events/${data.data.uuid}/`)
+      })
       .catch((error) => {
         setStatus({ submissionStatus: 'error', error })
         setSubmitting(false);
