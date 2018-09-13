@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import axios from 'axios';
-import { Header, Step, Grid, List, Checkbox, Button, Icon } from 'semantic-ui-react'
+import { Header, Step, Grid, List, Checkbox, Button, Icon, Statistic } from 'semantic-ui-react'
 
 import EventReviewCard from '../EventWizard/form/EventReviewCard';
 
@@ -19,12 +19,6 @@ const stepsArray = [
     active: true
   },
   {
-    key: 'checkout',
-    icon: 'shopping cart',
-    title: "Checkout",
-    disabled: true
-  },
-  {
     key: 'done',
     icon: 'check',
     title: "Done!",
@@ -38,6 +32,10 @@ function isPaidCategory(event) {
 
 function pricableFormatter({ name, price }) {
   return parseFloat(price) > 0 ? `${name} ($${price})` : `${name} (FREE!)`
+}
+
+function promotedCategoryFormatter({ name, price }) {
+  return `Category: ${pricableFormatter({ name, price })}`
 }
 
 class PromotePage extends Component {
@@ -60,7 +58,7 @@ class PromotePage extends Component {
     });
   }
 
-  totalPrice () {
+  totalPricePreTax () {
     const { event, promotions, checked } = this.state;
 
     let total = 0;
@@ -75,13 +73,21 @@ class PromotePage extends Component {
     return total;
   }
 
+  totalTax () {
+    return (0.13 * this.totalPricePreTax()).toFixed(2)
+  }
+
+  totalPricePostTax () {
+    return (1.13 * this.totalPricePreTax()).toFixed(2);
+  }
+
   onCheckout = () => {
     const { checked } = this.state;
     const data = Object.keys(checked).filter( id => checked[id])
     const eventUUID = this.props.match.params.eventUUID;
     axios.post(`/api/v1/events/${eventUUID}/create_invoice/`, data).then(() => {
       const eventUUID = this.props.match.params.eventUUID;
-      this.props.history.push(`/events/${eventUUID}/checkout/`);
+      this.props.history.push(`/events/${eventUUID}/done/`);
     });
   }
 
@@ -95,11 +101,11 @@ class PromotePage extends Component {
         {
           event && promotions &&
           <Grid celled='internally'>
-            <Grid.Column width={12}>
+            <Grid.Column width={10}>
               <List>
                 {
                   <List.Item>
-                    <Checkbox label={pricableFormatter(event.category)} defaultChecked disabled />
+                    <Checkbox label={promotedCategoryFormatter(event.category)} defaultChecked disabled />
                   </List.Item>
                 }
                 {
@@ -115,30 +121,57 @@ class PromotePage extends Component {
                 }
               </List>
             </Grid.Column>
-            <Grid.Column width={4}>
-              <Header icon='cart' content="Cart" />
-              <List divided>
+            <Grid.Column width={6}>
+              <Header icon='cart' content="Cart" as='h2' />
+              <List>
                 <List.Item>
-                  Category
-                  { isPaidCategory(event) && <span>Promoted category</span> }
-                  {pricableFormatter(event.category)}
+                  <Icon name='right triangle' />
+                  {promotedCategoryFormatter(event.category)}
                 </List.Item>
 
                 {
                   promotions.filter( item => checked[item.sku_id]).map( item => (
                     <List.Item key={item.sku_id}>
+                      <Icon name='right triangle' />
                       {pricableFormatter(item)}
                     </List.Item>
                   ))
                 }
               </List>
+              <Statistic.Group horizontal size='small'>
+                <Statistic>
+                  <Statistic.Value>${this.totalPricePreTax()}</Statistic.Value>
+                  <Statistic.Label>Total</Statistic.Label>
+                </Statistic>
 
-              <Button animated='vertical' onClick={this.onCheckout}>
+                <Statistic>
+                  <Statistic.Value>${this.totalTax()}</Statistic.Value>
+                  <Statistic.Label>HST (13%)</Statistic.Label>
+                </Statistic>
+
+                <Statistic>
+                  <Statistic.Value>${this.totalPricePostTax()}</Statistic.Value>
+                  <Statistic.Label>Total payable</Statistic.Label>
+                </Statistic>
+              </Statistic.Group>
+
+
+              {/* <Button animated='vertical' onClick={this.onCheckout}>
                 <Button.Content hidden>Checkout</Button.Content>
                 <Button.Content visible>
-                  <Icon name='shop' /> ${this.totalPrice()}
+                  <Icon name='shop' />
                 </Button.Content>
-              </Button>
+              </Button> */}
+
+              {
+                this.totalPricePreTax () === 0 &&
+                <Button primary><Icon name='send' /> Submit free event</Button>
+              }
+              {
+                this.totalPricePreTax () > 0 &&
+                <Button primary><Icon name='shop' /> Pay ${this.totalPricePostTax()} with Stripe</Button>
+              }
+
             </Grid.Column>
           </Grid>
         }
