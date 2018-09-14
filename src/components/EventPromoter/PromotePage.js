@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 import axios from 'axios';
 import { Header, Step, Grid, List, Checkbox, Button, Icon, Statistic } from 'semantic-ui-react'
+import StripeCheckout from 'react-stripe-checkout';
+
+import { stripeKey } from '../../consts'
+
 
 import EventReviewCard from '../EventWizard/form/EventReviewCard';
 
@@ -42,7 +46,8 @@ class PromotePage extends Component {
   state = {
     event: null,
     promotions: [],
-    checked: {}
+    checked: {},
+    loading: false
   }
   componentWillMount () {
     const eventUUID = this.props.match.params.eventUUID;
@@ -81,13 +86,24 @@ class PromotePage extends Component {
     return (1.13 * this.totalPricePreTax()).toFixed(2);
   }
 
-  onCheckout = () => {
+  onToken = (token) => {
     const { checked } = this.state;
-    const data = Object.keys(checked).filter( id => checked[id])
     const eventUUID = this.props.match.params.eventUUID;
-    axios.post(`/api/v1/events/${eventUUID}/create_invoice/`, data).then(() => {
-      const eventUUID = this.props.match.params.eventUUID;
+    const checkedPromos = Object.keys(checked).filter( id => checked[id])
+    axios.post(`/api/v1/events/${eventUUID}/create_invoice/`, checkedPromos).then(() => {
+      axios.post(`/api/v1/events/${eventUUID}/pay/`, token).then(() => {
+        this.submitEvent()
+      });
+    });
+  }
+
+  submitEvent = () => {
+    this.setState({ loading: true })
+    const eventUUID = this.props.match.params.eventUUID;
+    axios.post(`/api/v1/events/${eventUUID}/submit/`, {}).then(() => {
       this.props.history.push(`/events/${eventUUID}/done/`);
+    }).catch((error) => {
+      this.setState({ loading: false })
     });
   }
 
@@ -154,22 +170,33 @@ class PromotePage extends Component {
                   <Statistic.Label>Total payable</Statistic.Label>
                 </Statistic>
               </Statistic.Group>
-
-
-              {/* <Button animated='vertical' onClick={this.onCheckout}>
-                <Button.Content hidden>Checkout</Button.Content>
-                <Button.Content visible>
-                  <Icon name='shop' />
-                </Button.Content>
-              </Button> */}
+              
 
               {
                 this.totalPricePreTax () === 0 &&
-                <Button primary><Icon name='send' /> Submit free event</Button>
+                <Button onClick={this.submitEvent} loading={this.state.loading} primary>
+                  <Icon name='send' /> Submit free event
+                </Button>
               }
               {
                 this.totalPricePreTax () > 0 &&
-                <Button primary><Icon name='shop' /> Pay ${this.totalPricePostTax()} with Stripe</Button>
+                <StripeCheckout
+                  name="NOW Toronto"
+                  description="Events submission form"
+                  image="https://nowtoronto.com/api/design-9c8e29cb008a8cdad4bb7a41f0f6d908/NOWLOGO%20FOR%20WEBsite.png"
+                  amount={this.totalPricePostTax() * 100}
+                  currency="USD"
+                  token={this.onToken}
+                  email={event.owner_email}
+                  stripeKey={stripeKey}
+                  ComponentClass="div"
+                  // opened={}
+                  closed={() => this.setState({ loading: false })}
+                >
+                  <Button loading={this.state.loading} primary onClick={() => this.setState({ loading: true })}>
+                    <Icon name='shop' /> Pay ${this.totalPricePostTax()} with Stripe
+                  </Button>
+                </StripeCheckout>
               }
 
             </Grid.Column>
