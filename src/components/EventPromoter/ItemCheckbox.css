@@ -1,0 +1,7 @@
+.item-checkbox {
+    cursor: pointer;
+}
+
+.item-checkbox:hover:not(.disabled) {
+    background-color: #83e283
+}

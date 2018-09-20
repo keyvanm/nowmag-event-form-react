@@ -4,6 +4,7 @@ import { Header, Step, Grid, List, Checkbox, Button, Icon, Statistic } from 'sem
 import StripeCheckout from 'react-stripe-checkout';
 
 import { stripeKey } from '../../consts'
+import ItemCheckbox from './ItemCheckbox';
 
 const stepsArray = [
   {
@@ -117,7 +118,12 @@ class PromotePage extends Component {
               <List>
                 {
                   <List.Item>
-                    <Checkbox label={promotedCategoryFormatter(event.category)} defaultChecked disabled />
+                    {/* <Checkbox label={promotedCategoryFormatter(event.category)} defaultChecked disabled /> */}
+                    <ItemCheckbox
+                      name="Category"
+                      description={event.category.name}
+                      price={event.category.price} 
+                      checked disabled/>
                   </List.Item>
                 }
                 {
