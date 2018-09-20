@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Switch, Route, Redirect } from 'react-router';
-import axios from 'axios';
 
 import PromotePage from './PromotePage';
 import Done from './Done';

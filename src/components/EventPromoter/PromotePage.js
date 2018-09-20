@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router';
 import axios from 'axios';
 import { Header, Step, Grid, List, Checkbox, Button, Icon, Statistic } from 'semantic-ui-react'
 import StripeCheckout from 'react-stripe-checkout';
 
 import { stripeKey } from '../../consts'
-
-
-import EventReviewCard from '../EventWizard/form/EventReviewCard';
 
 const stepsArray = [
   {
