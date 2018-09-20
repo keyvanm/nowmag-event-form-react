@@ -5,6 +5,7 @@ import StripeCheckout from 'react-stripe-checkout';
 
 import { stripeKey } from '../../consts'
 import ItemCheckbox from './ItemCheckbox';
+import ImageUpload from './ImageUpload';
 
 const stepsArray = [
   {
@@ -44,6 +45,7 @@ class PromotePage extends Component {
     event: null,
     promotions: [],
     checked: {},
+    teaserImageUUID: null,
     loading: false
   }
   componentWillMount () {
@@ -94,6 +96,10 @@ class PromotePage extends Component {
     return (1.13 * this.totalPricePreTax()).toFixed(2);
   }
 
+  onDrop = (teaserImageUUID) => {
+    this.setState({ teaserImageUUID });
+  }
+
   onToken = (token) => {
     const { checked } = this.state;
     const eventUUID = this.props.match.params.eventUUID;
@@ -116,6 +122,7 @@ class PromotePage extends Component {
   }
 
   render() {
+    const eventUUID = this.props.match.params.eventUUID;
     const { event, promotions, checked } = this.state;
 
     return (
@@ -159,7 +166,7 @@ class PromotePage extends Component {
                 this.shouldUploadIamge() &&
                 <div>
                   <Divider horizontal>Upload your event teaser image</Divider>
-
+                  <ImageUpload eventUUID={eventUUID}/>
                 </div>
               }
               
