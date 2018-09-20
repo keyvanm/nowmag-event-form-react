@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Header, Step, Grid, List, Button, Icon, Statistic, Item } from 'semantic-ui-react'
+import { Header, Step, Grid, List, Button, Icon, Statistic, Item, Divider } from 'semantic-ui-react'
 import StripeCheckout from 'react-stripe-checkout';
 
 import { stripeKey } from '../../consts'
@@ -58,6 +58,17 @@ class PromotePage extends Component {
       }
       this.setState({ promotions: data, checked });
     });
+  }
+
+  shouldUploadIamge () {
+    for (let promo of this.state.promotions) {
+      if (this.state.checked[promo.sku_id]) {
+        if (promo.should_upload_image) {
+          return true;
+        }
+      }
+    }
+    return false;
   }
 
   totalPricePreTax () {
@@ -144,6 +155,15 @@ class PromotePage extends Component {
                   ))
                 }
               </Item.Group>
+              {
+                this.shouldUploadIamge() &&
+                <div>
+                  <Divider horizontal>Upload your event teaser image</Divider>
+
+                </div>
+              }
+              
+
             </Grid.Column>
 
             
