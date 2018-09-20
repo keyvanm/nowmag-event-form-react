@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Header, Step, Grid, List, Checkbox, Button, Icon, Statistic, Item } from 'semantic-ui-react'
+import { Header, Step, Grid, List, Button, Icon, Statistic, Item } from 'semantic-ui-react'
 import StripeCheckout from 'react-stripe-checkout';
 
 import { stripeKey } from '../../consts'
@@ -145,6 +145,8 @@ class PromotePage extends Component {
                 }
               </Item.Group>
             </Grid.Column>
+
+            
             <Grid.Column width={6}>
               <Header icon='cart' content="Cart" as='h2' />
               <List>

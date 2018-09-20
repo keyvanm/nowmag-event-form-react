@@ -31,7 +31,7 @@ class ItemCheckbox extends React.Component {
   }
 
   render () {
-    const { name, price, description, checked, image, disabled } = this.props;
+    const { name, price, description, checked, disabled } = this.props;
     return (
       <Grid 
         verticalAlign='middle'
@@ -47,7 +47,6 @@ class ItemCheckbox extends React.Component {
         </Grid.Column>
         <Grid.Column width={15}>
           <Item>
-            {image && <Item.Image size='tiny' src={image} />}
             <Item.Content>
               <Item.Header as='h5'>{name}</Item.Header>
               {description && <Item.Description>
