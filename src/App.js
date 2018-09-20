@@ -12,7 +12,7 @@ class App extends Component {
     return (
       <Container>
         <Switch>
-          <Route path="/events/add" component={EventWizard} />
+          <Route path="/events/add/" component={EventWizard} />
           <Route path="/events/:eventUUID/" component={EventPromoter}/>
         </Switch>
       </Container>

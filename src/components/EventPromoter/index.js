@@ -3,6 +3,7 @@ import { Switch, Route, Redirect } from 'react-router';
 import axios from 'axios';
 
 import PromotePage from './PromotePage';
+import Done from './Done';
 
 
 function joinPath(match, path) {
@@ -19,7 +20,7 @@ class EventPromoter extends Component {
         <Switch>
           <Redirect exact path={match.path} to={joinPath(match, "promote/")} />
           <Route path={joinPath(match, "promote/")} component={PromotePage} />
-          {/* <Route path={joinPath(match, "done/")} component={PromotePage} /> */}
+          <Route path={joinPath(match, "done/")} component={Done} />
         </Switch>
       </div>
     );
