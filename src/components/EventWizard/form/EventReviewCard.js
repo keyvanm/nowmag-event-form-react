@@ -23,7 +23,7 @@ class LocationComponent extends Component {
     return (
       <div>
         <Icon name='marker' />
-        <span>{ this.state.name } ({ this.state.address })</span>
+        <span>{ this.state.name } {this.state.address && <span>({ this.state.address })</span>}</span>
       </div>
     )
   }
