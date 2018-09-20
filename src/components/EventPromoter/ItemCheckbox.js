@@ -27,7 +27,9 @@ class ItemCheckbox extends React.Component {
 
   toggleChecked = () => {
     const { checked, onChange } = this.props;
-    onChange(!checked);
+    if (onChange) {
+      onChange(!checked);
+    }
   }
 
   render () {
