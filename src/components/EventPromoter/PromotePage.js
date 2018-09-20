@@ -115,7 +115,7 @@ class PromotePage extends Component {
           event && promotions &&
           <Grid celled='internally'>
             <Grid.Column width={10}>
-              <List>
+              <List divided>
                 {
                   <List.Item>
                     {/* <Checkbox label={promotedCategoryFormatter(event.category)} defaultChecked disabled /> */}
@@ -129,10 +129,15 @@ class PromotePage extends Component {
                 {
                   promotions.map( item => (
                     <List.Item key={item.sku_id}>
-                      <Checkbox
+                      {/* <Checkbox
                         label={pricableFormatter(item)}
                         checked={checked[item.sku_id]}
                         onChange={(e, {checked}) => { this.setState({ checked: { ...this.state.checked, [item.sku_id]: checked } })}}
+                      /> */}
+                      <ItemCheckbox
+                        name={item.name}
+                        price={item.price} 
+                        checked={checked[item.sku_id]}
                       />
                     </List.Item>
                   ))

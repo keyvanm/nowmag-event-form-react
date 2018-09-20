@@ -34,7 +34,7 @@ class ItemCheckbox extends React.Component {
         columns={2}
         onMouseOver={this.toggleHoverOn}
         onMouseOut={this.toggleHoverOff}
-        className={"item-checkbox" + disabled ? " disabled" : ""}
+        className={"item-checkbox" + (disabled ? " disabled" : "")}
       >
         <Grid.Column width={1}>
             <Icon color={this.color()} size='large' name={checked? 'check square outline' : 'square outline'} />
