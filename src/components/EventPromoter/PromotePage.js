@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Header, Step, Grid, List, Checkbox, Button, Icon, Statistic } from 'semantic-ui-react'
+import { Header, Step, Grid, List, Checkbox, Button, Icon, Statistic, Item } from 'semantic-ui-react'
 import StripeCheckout from 'react-stripe-checkout';
 
 import { stripeKey } from '../../consts'
@@ -115,20 +115,20 @@ class PromotePage extends Component {
           event && promotions &&
           <Grid celled='internally'>
             <Grid.Column width={10}>
-              <List divided>
+              <Item.Group divided>
                 {
-                  <List.Item>
+                  <Item>
                     {/* <Checkbox label={promotedCategoryFormatter(event.category)} defaultChecked disabled /> */}
                     <ItemCheckbox
                       name="Category"
                       description={event.category.name}
                       price={event.category.price} 
                       checked disabled/>
-                  </List.Item>
+                  </Item>
                 }
                 {
                   promotions.map( item => (
-                    <List.Item key={item.sku_id}>
+                    <Item key={item.sku_id}>
                       {/* <Checkbox
                         label={pricableFormatter(item)}
                         checked={checked[item.sku_id]}
@@ -138,11 +138,12 @@ class PromotePage extends Component {
                         name={item.name}
                         price={item.price} 
                         checked={checked[item.sku_id]}
+                        onChange={checked => { this.setState({ checked: { ...this.state.checked, [item.sku_id]: checked } })}}
                       />
-                    </List.Item>
+                    </Item>
                   ))
                 }
-              </List>
+              </Item.Group>
             </Grid.Column>
             <Grid.Column width={6}>
               <Header icon='cart' content="Cart" as='h2' />

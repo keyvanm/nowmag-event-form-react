@@ -1,7 +1,12 @@
 .item-checkbox {
     cursor: pointer;
+    transition: 0.3s;
 }
 
-.item-checkbox:hover:not(.disabled) {
-    background-color: #83e283
+.item-checkbox.disabled {
+    cursor: not-allowed
+}
+
+.item-checkbox:hover {
+    background-color: #eee
 }

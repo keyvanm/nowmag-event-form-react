@@ -25,6 +25,11 @@ class ItemCheckbox extends React.Component {
     return 'black'
   }
 
+  toggleChecked = () => {
+    const { checked, onChange } = this.props;
+    onChange(!checked);
+  }
+
   render () {
     const { name, price, description, checked, image, disabled } = this.props;
     return (
@@ -34,6 +39,7 @@ class ItemCheckbox extends React.Component {
         columns={2}
         onMouseOver={this.toggleHoverOn}
         onMouseOut={this.toggleHoverOff}
+        onClick={this.toggleChecked}
         className={"item-checkbox" + (disabled ? " disabled" : "")}
       >
         <Grid.Column width={1}>
@@ -43,7 +49,7 @@ class ItemCheckbox extends React.Component {
           <Item>
             {image && <Item.Image size='tiny' src={image} />}
             <Item.Content>
-              <Item.Header>{name}</Item.Header>
+              <Item.Header as='h5'>{name}</Item.Header>
               {description && <Item.Description>
                 {description}
               </Item.Description>}
