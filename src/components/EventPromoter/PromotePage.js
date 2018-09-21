@@ -134,7 +134,7 @@ class PromotePage extends Component {
         <Header as='h1'>Promote your event</Header>
         {
           event && promotions &&
-          <Grid celled='internally'>
+          <Grid stackable celled='internally'>
             <Grid.Column width={10}>
               <Item.Group divided>
                 {
