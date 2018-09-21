@@ -101,7 +101,12 @@ export class WizardFormLocationPage extends Component {
         }
         <Divider horizontal>Or</Divider>
         <Form.Field>
-          <Radio toggle label="I couldn't find the venue on the above list" onChange={this.handleNewLocationToggle} />
+          <Radio
+            toggle
+            label="I couldn't find the venue on the above list"
+            onChange={this.handleNewLocationToggle}
+            checked={location.isNewVenue}
+          />
         </Form.Field>
         { location.isNewVenue &&
           <div>
