@@ -3,7 +3,6 @@ import axios from 'axios';
 import { Header, Step, Grid, List, Button, Icon, Statistic, Item, Divider } from 'semantic-ui-react'
 import StripeCheckout from 'react-stripe-checkout';
 
-import { stripeKey } from '../../consts'
 import ItemCheckbox from './ItemCheckbox';
 import ImageUpload from './ImageUpload';
 
@@ -42,6 +41,7 @@ function promotedCategoryFormatter({ name, price }) {
 
 class PromotePage extends Component {
   state = {
+    stripeKey: null,
     event: null,
     promotions: [],
     checked: {},
@@ -49,6 +49,9 @@ class PromotePage extends Component {
     loading: false
   }
   componentWillMount () {
+    axios.get(`/api/v1/stripe-key/`).then(({data}) => {
+      this.setState({ stripeKey: data.public_key });
+    });
     const eventUUID = this.props.match.params.eventUUID;
     axios.get(`/api/v1/events/${eventUUID}/`).then(({data}) => {
       this.setState({ event: data });
@@ -216,7 +219,7 @@ class PromotePage extends Component {
                 </Button>
               }
               {
-                this.totalPricePreTax () > 0 &&
+                (this.totalPricePreTax () > 0 && this.state.stripeKey) &&
                 <StripeCheckout
                   name="NOW Toronto"
                   description="Events submission form"
@@ -225,7 +228,7 @@ class PromotePage extends Component {
                   currency="USD"
                   token={this.onToken}
                   email={event.owner_email}
-                  stripeKey={stripeKey}
+                  stripeKey={this.state.stripeKey}
                   ComponentClass="div"
                   // opened={}
                   closed={() => this.setState({ loading: false })}
