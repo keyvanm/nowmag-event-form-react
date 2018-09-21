@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Container } from 'semantic-ui-react';
-import { Switch, Route } from 'react-router';
+import { Switch, Route, Redirect } from 'react-router';
 
 import EventWizard from './components/EventWizard'
 import EventPromoter from './components/EventPromoter'
@@ -12,6 +12,7 @@ class App extends Component {
     return (
       <Container>
         <Switch>
+          <Redirect exact from="/" to="/events/add/" />
           <Route path="/events/add/" component={EventWizard} />
           <Route path="/events/:eventUUID/" component={EventPromoter}/>
         </Switch>
