@@ -1,9 +1,19 @@
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 768px) {
     .ui.steps.unstackable .step .content {
         display: none !important;
     }
     .ui.steps.unstackable .step .icon {
         font-size: 1.5em;
         margin: 0;
+    }
+}
+
+@media only screen and (max-width: 992px) and (min-width: 769px) {
+    .ui.steps.unstackable .step .content .title {
+        font-size: 1em;
+    }
+    .ui.steps.unstackable .step .icon {
+        font-size: 1.5em;
+        margin: 0 0.5rem 0 0;
     }
 }
