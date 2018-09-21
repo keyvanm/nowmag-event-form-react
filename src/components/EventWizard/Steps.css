@@ -2,4 +2,8 @@
     .ui.steps.unstackable .step .content {
         display: none !important;
     }
+    .ui.steps.unstackable .step .icon {
+        font-size: 1.5em;
+        margin: 0;
+    }
 }
