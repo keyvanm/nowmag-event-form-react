@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Form, Message, Button, Header, Icon, List } from 'semantic-ui-react'
+import { Form, Message, Header, Icon, List } from 'semantic-ui-react'
 
 import FormButtonGroup from './FormButtonGroup';
 import WizardFormAddPage from './pages/WizardFormAddPage';
@@ -46,10 +46,6 @@ export default class EventForm extends Component {
         success={this.submissionStatus() === 'success'}
         error={Object.keys(errors).filter( key => touched[key]).length > 0}
       >
-        <Message success icon='check' className='wizard-message'
-          content="Awesome Click next"
-        />
-
         {
           this.submissionStatus() !== 'success' && currentStep === 1 &&
           <WizardFormAddPage {...form} />
@@ -111,10 +107,6 @@ export default class EventForm extends Component {
         {
           this.submissionStatus() !== 'success' &&
           <FormButtonGroup loading={form.isSubmitting} buttonAbility={buttonAbility} buttonHandlers={buttonHandlers} />
-        }
-        {
-          this.submissionStatus() === 'success' &&
-          <Button primary>Next</Button>
         }
       </Form>
     )
