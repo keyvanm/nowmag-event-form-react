@@ -30,10 +30,10 @@ export class WizardFormDatePage extends Component {
               <label>When does your event start?</label>
               <DatePicker
                 showTimeSelect
-                timeFormat="HH:mm"
+                // timeFormat="h:mm a"
                 timeIntervals={30}
                 dateFormat="LLL"
-                timeCaption="time"
+                // timeCaption="time"
                 autoFocus={true}
                 name='start'
                 selected={values.start}
@@ -45,10 +45,10 @@ export class WizardFormDatePage extends Component {
               <label>When does your event end? (Optional)</label>
               <DatePicker
                 showTimeSelect
-                timeFormat="HH:mm"
+                // timeFormat="h:mm"
                 timeIntervals={30}
                 dateFormat="LLL"
-                timeCaption="time"
+                // timeCaption="time"
                 name='start'
                 selected={values.end}
                 onChange={this.handleEndChange}
