@@ -9,6 +9,7 @@ import configureStore from './configureStore';
 
 import 'semantic-ui-css/semantic.min.css';
 // import './css/semantic.united.min.css';
+// import './css/semantic.simplex.min.css';
 import './index.css';
 
 const store = configureStore();
