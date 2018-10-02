@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Modal, Header, Icon } from 'semantic-ui-react'
+import { Button, Modal, Header, Icon, Popup } from 'semantic-ui-react'
 
 import './FormButtonGroup.css';
 
@@ -7,7 +7,7 @@ import './FormButtonGroup.css';
 
 function ResetConfirmModal({ isOpen, handleOpen, handleNo, handleYes, handleClose }) {
   return (
-    <Modal trigger={<Button className="reset" basic onClick={handleOpen}>Reset</Button>} basic size='small' onClose={handleClose} open={isOpen}>
+    <Modal trigger={<Button type="button" className="reset" basic onClick={handleOpen}>Reset</Button>} basic size='small' onClose={handleClose} open={isOpen}>
       <Header icon='warning' content='Are you sure you want to reset the form?' />
       <Modal.Content>
         <p>
@@ -70,13 +70,19 @@ export default class FormButtonGroup extends Component {
         </div>
         <div className="right-form-button-group">
           {
-            back && <Button loading={loading} disabled={loading} onClick={handleBackBtn}>Back</Button>
+            back && <Button type="button" loading={loading} disabled={loading} onClick={handleBackBtn}>Back</Button>
           }
           {
-            next && <Button loading={loading} disabled={loading || !next} onClick={handleNextBtn} primary>Next</Button>
+            next && 
+              <Popup
+                trigger={
+                  <Button type="button" loading={loading} disabled={loading || !next} onClick={handleNextBtn} primary>Next</Button>
+                }>
+                You can also press <kbd>ctrl + enter</kbd> or <kbd>cmd + enter</kbd> to go to the next page
+              </Popup>
           }
           {
-            submit && <Button loading={loading} disabled={loading || !submit} positive type='submit'>Next</Button>
+            submit && <Button type="button" loading={loading} disabled={loading || !submit} positive type='submit'>Next</Button>
           }
         </div>
       </div>

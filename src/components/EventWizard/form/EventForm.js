@@ -21,8 +21,7 @@ export default class EventForm extends Component {
   }
 
   onKeyPress = (event) => {
-    if (event.key === 'Enter') {
-      event.preventDefault();
+    if (event.key === 'Enter' && (event.ctrlKey || event.metaKey)) {
       this.props.buttonHandlers.handleEnterBtn(event);
     }
   }
@@ -42,7 +41,7 @@ export default class EventForm extends Component {
 
     return (
       <Form
-        onKeyPress={this.onKeyPress} onSubmit={buttonHandlers.handleEnterBtn}
+        onKeyDown={this.onKeyPress} onSubmit={buttonHandlers.handleEnterBtn}
         success={this.submissionStatus() === 'success'}
         error={Object.keys(errors).filter( key => touched[key]).length > 0}
       >
