@@ -88,7 +88,7 @@ export class WizardFormLocationPage extends Component {
             <label>Where is your event located?</label>
             <Dropdown
               fluid search selection
-              autoFocus={true}
+              searchInput={{ autoFocus: true }}
               placeholder='Location'
               name='location'
               options={this.state.locationOptions}
