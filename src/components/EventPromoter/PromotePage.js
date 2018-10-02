@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Header, Step, Grid, List, Button, Icon, Statistic, Item, Divider } from 'semantic-ui-react'
+import { Header, Step, Grid, List, Button, Icon, Statistic, Item, Divider, Message } from 'semantic-ui-react'
 import StripeCheckout from 'react-stripe-checkout';
 
 import ItemCheckbox from './ItemCheckbox';
@@ -132,6 +132,11 @@ class PromotePage extends Component {
       <div>
         <Step.Group items={stepsArray} attached='top' widths={stepsArray.length} unstackable/>
         <Header as='h1'>Promote your event</Header>
+        { event && this.totalPricePreTax() === 0 &&
+          <Message warning>
+            <p>Please click on <b>submit</b> even if you don't select a paid promotion, so we can have a record of your event. It's free to post!</p>
+          </Message>
+        }
         {
           event && promotions &&
           <Grid stackable celled='internally'>
