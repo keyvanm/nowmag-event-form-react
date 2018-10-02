@@ -81,6 +81,7 @@ export default withFormik({
     name: '',
     category: '',
     description: '',
+    tickets: '',
     location: {
       isNewVenue: false,
       existingVenue: '',

@@ -23,7 +23,7 @@ export class WizardFormAddPage extends Component {
   }
 
   componentWillUnmount () {
-    this.props.setTouched({ ...this.props.touched, name: true, category: true, description: true });
+    this.props.setTouched({ ...this.props.touched, name: true, category: true, description: true, tickets: true });
   }
 
   handleCategoryChange = (event, data) => {
@@ -70,6 +70,18 @@ export class WizardFormAddPage extends Component {
             placeholder='Description'
             name='description'
             value={values.description}
+            onChange={handleChange}
+            onBlur={handleBlur}
+          />
+        </Form.Field>
+        <Form.Field required error={ touched.tickets && Boolean(errors.tickets) }>
+          <label>Please put any information regarding the price of the event, or its tickets here</label>
+          <TextArea
+            autoHeight
+            rows={2}
+            placeholder='Tickets'
+            name='tickets'
+            value={values.tickets}
             onChange={handleChange}
             onBlur={handleBlur}
           />

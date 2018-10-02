@@ -7,6 +7,7 @@ export const eventSchema = /*yup.object*/({
     .string()
     .required(),
   description: yup.string().max(400).required(),
+  tickets: yup.string().required(),
   location: yup.object({
     isNewVenue: yup.bool().required(),
     existingVenue: yup.string(),
@@ -34,6 +35,10 @@ export default (values, props) => {
     errors.description = <p>Please write a <b>description</b> for your event</p>
   } else if (!yup.string().max(400).isValidSync(values.description)) {
     errors.description = <p>Please keep the <b>description</b> under 400 characters</p>
+  }
+
+  if (!eventSchema.tickets.isValidSync(values.tickets)) {
+    errors.tickets = <p>Please provide <b>ticketing/pricing</b> information for your event</p>
   }
 
   if (values.location.isNewVenue) {

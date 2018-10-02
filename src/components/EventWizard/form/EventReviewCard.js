@@ -56,7 +56,7 @@ export default class EventReviewCard extends Component {
     const { values } = this.props;
 
     return (
-      <Segment>
+      <Segment className="event-review-card">
         <Header>{ values.name }</Header>
         <div>
           <LocationComponent location={values.location} />
@@ -73,9 +73,9 @@ export default class EventReviewCard extends Component {
             </span>
           }
         </div>
+        <div><Icon name='ticket'/> {values.tickets}</div>
         <Segment raised>{ values.description }</Segment>
         <CategoryComponent category={values.category} />
-
         <div>
           <List horizontal>
             {
