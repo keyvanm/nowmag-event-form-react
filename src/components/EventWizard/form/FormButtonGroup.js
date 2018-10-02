@@ -82,7 +82,7 @@ export default class FormButtonGroup extends Component {
               </Popup>
           }
           {
-            submit && <Button type="button" loading={loading} disabled={loading || !submit} positive type='submit'>Next</Button>
+            submit && <Button loading={loading} disabled={loading || !submit} primary type='submit'>Next</Button>
           }
         </div>
       </div>
