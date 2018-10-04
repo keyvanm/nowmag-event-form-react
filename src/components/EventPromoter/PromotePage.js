@@ -132,6 +132,7 @@ class PromotePage extends Component {
       <div>
         <Step.Group items={stepsArray} attached='top' widths={stepsArray.length} unstackable/>
         <Header as='h1'>Promote your event</Header>
+        {event && <Header as='h3'>{event.name}</Header>}
         { event && this.totalPricePreTax() === 0 &&
           <Message warning>
             <p>Please click on <b>submit</b> even if you don't select a paid promotion, so we can have a record of your event. It's free to post!</p>
