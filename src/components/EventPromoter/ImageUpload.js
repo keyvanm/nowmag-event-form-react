@@ -13,6 +13,7 @@ class ImageUpload extends Component {
     data.append('image', image);
     const { eventUUID } = this.props;
     axios.post(`/api/v1/events/${eventUUID}/upload_teaser_image/`, data);
+    // handle error, "Error uploading the image, pls try again"
   }
 
   render() {
