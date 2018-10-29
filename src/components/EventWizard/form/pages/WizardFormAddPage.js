@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Select, Input, TextArea } from 'semantic-ui-react'
+import { Form, Select, Input, TextArea, Popup } from 'semantic-ui-react'
 import axios from 'axios';
 
 
@@ -54,13 +54,19 @@ export class WizardFormAddPage extends Component {
         </Form.Field>
         <Form.Field required error={ touched.category && Boolean(errors.category) }>
           <label>Which of these categories best describe your event?</label>
-          <Select
-            placeholder='Category'
-            options={this.state.categoryOptions}
-            name='category'
-            value={values.category}
-            onChange={this.handleCategoryChange}
-            // onBlur={handleBlur}
+          <Popup
+            trigger={
+              <Select
+                placeholder='Category'
+                options={this.state.categoryOptions}
+                name='category'
+                value={values.category}
+                onChange={this.handleCategoryChange}
+                // onBlur={handleBlur}
+              />
+            }
+            content='Scroll down to see more options'
+            on='focus'
           />
         </Form.Field>
         <Form.Field required error={ touched.description && Boolean(errors.description) }>
