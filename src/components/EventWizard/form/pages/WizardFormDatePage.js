@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Form } from 'semantic-ui-react'
+import { Form, Label } from 'semantic-ui-react'
 import DatePicker from 'react-datepicker'
+
 
 export class WizardFormDatePage extends Component {
   componentWillUnmount () {
@@ -28,6 +29,12 @@ export class WizardFormDatePage extends Component {
           <Form.Group widths='equal'>
             <Form.Field required error={ touched.start && Boolean(errors.start) }>
               <label>When does your event start?</label>
+              {
+                values.start && values.start.hour() == 0 && values.start.minute() == 0 && 
+                <Label basic color='red' pointing="below">
+                  Don't forget to pick a time
+                </Label>
+              }
               <DatePicker
                 showTimeSelect
                 // timeFormat="h:mm a"
@@ -43,6 +50,12 @@ export class WizardFormDatePage extends Component {
             </Form.Field>
             <Form.Field error={ touched.end && Boolean(errors.end) }>
               <label>When does your event end? (Optional)</label>
+              {
+                values.end && values.end.hour() == 0 && values.end.minute() == 0 && 
+                <Label basic color='red' pointing="below">
+                  Don't forget to pick a time
+                </Label>
+              }
               <DatePicker
                 showTimeSelect
                 // timeFormat="h:mm"
