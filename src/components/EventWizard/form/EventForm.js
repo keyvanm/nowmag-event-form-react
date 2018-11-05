@@ -84,7 +84,6 @@ export default class EventForm extends Component {
                 <Header>Submission error</Header>
                 <p>
                   There was an error creating the event. Please review the entries and try again.
-                  If the problem continues contact info@bluh.com.
                 </p>
               </Message.Content>
             </Message>
