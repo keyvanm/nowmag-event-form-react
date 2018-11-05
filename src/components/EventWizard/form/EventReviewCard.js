@@ -73,7 +73,7 @@ export default class EventReviewCard extends Component {
             </span>
           }
         </div>
-        <div><Icon name='ticket'/> {values.tickets}</div>
+        <div><Icon name='ticket'/> {values.prices}</div>
         <Segment raised>{ values.description }</Segment>
         <CategoryComponent category={values.category} />
         <div>
@@ -98,6 +98,13 @@ export default class EventReviewCard extends Component {
             }
           </List>
         </div>
+        {
+          values.ticket_link &&
+          <div>
+            <Icon name='linkify'/><a target='_blank' href={values.ticket_link}>{values.ticket_link}</a>
+          </div>
+        }
+        
 
       </Segment>
     )

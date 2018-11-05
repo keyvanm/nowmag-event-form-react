@@ -81,7 +81,7 @@ export default withFormik({
     name: '',
     category: '',
     description: '',
-    tickets: '',
+    prices: '',
     location: {
       isNewVenue: false,
       existingVenue: '',
@@ -93,6 +93,7 @@ export default withFormik({
     phone_number: '',
     email: '',
     facebook: '',
+    ticket_link: '',
     owner_email: ''
   }),
   validate,

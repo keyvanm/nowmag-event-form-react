@@ -39,7 +39,7 @@ export class WizardFormInfoPage extends Component {
               >
                 <Header color='yellow' icon='info' content="hint" as='h6' />
                 <p><Icon color='blue' name='globe' />Use this format</p>
-                <p>http(s)://website.whatever</p>
+                <p>http(s)://website.something</p>
               </Popup>
             </Form.Field>
             <Form.Field error={ touched.phone_number && Boolean(errors.phone_number) }>
@@ -84,7 +84,31 @@ export class WizardFormInfoPage extends Component {
               >
                 <Header color='yellow' icon='info' content="hint" as='h6' />
                 <p><Icon color='blue' name='globe' />Use this format</p>
-                <p>http(s)://www.facebook.com/whatever</p>
+                <p>http(s)://www.facebook.com/something</p>
+              </Popup>
+            </Form.Field>
+          </Form.Group>
+          <Form.Group widths='equal'>
+            <Form.Field error={ touched.ticket_link && Boolean(errors.ticket_link) }>
+              <label>If your event is listed on a ticket website such as event brite, please put it here</label>
+              <Popup
+                flowing
+                trigger={
+                  <Input
+                    icon='linkify' iconPosition='left'
+                    // autoFocus={true} 
+                    placeholder='Ticket link'
+                    name='ticket_link'
+                    value={values.ticket_link}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  />
+                }
+                on='focus'
+              >
+                <Header color='yellow' icon='info' content="hint" as='h6' />
+                <p><Icon color='blue' name='globe' />Use this format</p>
+                <p>http(s)://website.something</p>
               </Popup>
             </Form.Field>
           </Form.Group>

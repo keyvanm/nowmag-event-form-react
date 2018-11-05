@@ -7,7 +7,7 @@ export const eventSchema = /*yup.object*/({
     .string()
     .required(),
   description: yup.string().max(400).required(),
-  tickets: yup.string().required(),
+  prices: yup.string().required(),
   location: yup.object({
     isNewVenue: yup.bool().required(),
     existingVenue: yup.string(),
@@ -18,6 +18,7 @@ export const eventSchema = /*yup.object*/({
   website: yup.string().url(),
   phone_number: yup.string(),
   facebook: yup.string().url(),
+  ticket_link: yup.string().url(),
   email: yup.string().email(),
   owner_email: yup.string().email().required(),
 });
@@ -37,8 +38,8 @@ export default (values, props) => {
     errors.description = <p>Please keep the <b>description</b> under 400 characters</p>
   }
 
-  if (!eventSchema.tickets.isValidSync(values.tickets)) {
-    errors.tickets = <p>Please provide <b>ticketing/pricing</b> information for your event</p>
+  if (!eventSchema.prices.isValidSync(values.prices)) {
+    errors.prices = <p>Please provide <b>pricing</b> information for your event</p>
   }
 
   if (values.location.isNewVenue) {
@@ -61,7 +62,7 @@ export default (values, props) => {
   } else if (values.end && values.end.isBefore(values.start)) {
     errors.end = <p><b>End date</b> cannot be before start date</p>
   }
-  const { website, phone_number, email, facebook } = values;
+  const { website, phone_number, email, facebook, ticket_link } = values;
   if (!(website || phone_number || email || facebook)) {
     errors.website = <p>At least one of the <b>website, phone number, email or facebook</b> is needed</p>
   }
@@ -76,6 +77,9 @@ export default (values, props) => {
   }
   if (facebook && !eventSchema.facebook.isValidSync(facebook)) {
     errors.facebook = <p>Please format the <b>facebook</b> page like so</p>
+  }
+  if (ticket_link && !eventSchema.ticket_link.isValidSync(ticket_link)) {
+    errors.ticket_link = <p>Please make sure the <b>ticket link</b> url is formatted like http(s)://...</p>
   }
 
   if (!values.owner_email) {
