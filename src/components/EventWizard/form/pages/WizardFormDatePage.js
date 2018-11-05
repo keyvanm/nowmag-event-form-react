@@ -30,7 +30,7 @@ export class WizardFormDatePage extends Component {
             <Form.Field required error={ touched.start && Boolean(errors.start) }>
               <label>When does your event start?</label>
               {
-                values.start && values.start.hour() == 0 && values.start.minute() == 0 && 
+                values.start && values.start.hour() === 0 && values.start.minute() === 0 && 
                 <Label basic color='red' pointing="below">
                   Don't forget to pick a time
                 </Label>
@@ -51,7 +51,7 @@ export class WizardFormDatePage extends Component {
             <Form.Field error={ touched.end && Boolean(errors.end) }>
               <label>When does your event end? (Optional)</label>
               {
-                values.end && values.end.hour() == 0 && values.end.minute() == 0 && 
+                values.end && values.end.hour() === 0 && values.end.minute() === 0 && 
                 <Label basic color='red' pointing="below">
                   Don't forget to pick a time
                 </Label>
