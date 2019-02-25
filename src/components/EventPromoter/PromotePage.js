@@ -117,7 +117,9 @@ class PromotePage extends Component {
   submitEvent = () => {
     this.setState({ loading: true })
     const eventUUID = this.props.match.params.eventUUID;
-    axios.post(`/api/v1/events/${eventUUID}/submit/`, {}).then(() => {
+    const { checked } = this.state;
+    const checkedPromos = Object.keys(checked).filter( id => checked[id])
+    axios.post(`/api/v1/events/${eventUUID}/submit/`, checkedPromos).then(() => {
       this.props.history.push(`/events/${eventUUID}/done/`);
     }).catch((error) => {
       this.setState({ loading: false })
@@ -149,7 +151,7 @@ class PromotePage extends Component {
                     <ItemCheckbox
                       name="Category"
                       description={event.category.name}
-                      price={event.category.price} 
+                      price={event.category.price}
                       checked disabled/>
                   </Item>
                 }
@@ -163,7 +165,7 @@ class PromotePage extends Component {
                       /> */}
                       <ItemCheckbox
                         name={item.name}
-                        price={item.price} 
+                        price={item.price}
                         checked={checked[item.sku_id]}
                         onChange={checked => { this.setState({ checked: { ...this.state.checked, [item.sku_id]: checked } })}}
                       />
@@ -178,11 +180,11 @@ class PromotePage extends Component {
                   <ImageUpload eventUUID={eventUUID}/>
                 </div>
               }
-              
+
 
             </Grid.Column>
 
-            
+
             <Grid.Column width={6}>
               <Header icon='cart' content="Cart" as='h2' />
               <List>
@@ -216,7 +218,7 @@ class PromotePage extends Component {
                   <Statistic.Label>Total payable</Statistic.Label>
                 </Statistic>
               </Statistic.Group>
-              
+
 
               {
                 this.totalPricePreTax () === 0 &&
