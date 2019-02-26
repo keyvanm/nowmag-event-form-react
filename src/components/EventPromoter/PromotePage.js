@@ -146,14 +146,14 @@ class PromotePage extends Component {
             <Grid.Column>
               <Item.Group divided>
                 {
-                  <Item>
-                    {/* <Checkbox label={promotedCategoryFormatter(event.category)} defaultChecked disabled /> */}
-                    <ItemCheckbox
-                      name="Category"
-                      description={event.category.name}
-                      price={event.category.price}
-                      checked disabled/>
-                  </Item>
+                  // <Item>
+                  //   <Checkbox label={promotedCategoryFormatter(event.category)} defaultChecked disabled />
+                  //   <ItemCheckbox
+                  //     name="Category"
+                  //     description={event.category.name}
+                  //     price={event.category.price}
+                  //     checked disabled/>
+                  // </Item>
                 }
                 {
                   promotions.map( item => (

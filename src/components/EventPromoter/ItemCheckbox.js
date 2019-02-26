@@ -51,8 +51,8 @@ class ItemCheckbox extends React.Component {
         <Grid.Column width={15}>
           <Item>
             <Item.Content>
-              <Item.Header as='h5'>{name}</Item.Header>
-              {description && <Item.Description>
+              <Item.Header as='h5' style={{ marginTop: '-2px' }}>{name}</Item.Header>
+              {/* {description && <Item.Description>
                 {description}
               </Item.Description>}
               <Item.Extra>
@@ -61,7 +61,7 @@ class ItemCheckbox extends React.Component {
                     <span>${price}</span> :
                     <span></span>
                 }
-              </Item.Extra>
+              </Item.Extra> */}
             </Item.Content>
           </Item>
         </Grid.Column>
