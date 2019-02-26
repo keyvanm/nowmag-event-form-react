@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Header, Step, Grid, List, Button, Icon, Statistic, Item, Divider, Message } from 'semantic-ui-react'
-import StripeCheckout from 'react-stripe-checkout';
+import { Header, Step, Grid, Button, Icon, Item, Divider, Message } from 'semantic-ui-react'
+// import StripeCheckout from 'react-stripe-checkout';
 
 import ItemCheckbox from './ItemCheckbox';
 import ImageUpload from './ImageUpload';
@@ -31,13 +31,13 @@ function isPaidCategory(event) {
   return parseFloat(event.category.price) > 0;
 }
 
-function pricableFormatter({ name, price }) {
-  return parseFloat(price) > 0 ? `${name} ($${price})` : `${name} (FREE!)`
-}
+// function pricableFormatter({ name, price }) {
+//   return parseFloat(price) > 0 ? `${name} ($${price})` : `${name} (FREE!)`
+// }
 
-function promotedCategoryFormatter({ name, price }) {
-  return `Category: ${pricableFormatter({ name, price })}`
-}
+// function promotedCategoryFormatter({ name, price }) {
+//   return `Category: ${pricableFormatter({ name, price })}`
+// }
 
 class PromotePage extends Component {
   state = {

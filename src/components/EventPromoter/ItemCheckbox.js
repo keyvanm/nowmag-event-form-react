@@ -33,10 +33,9 @@ class ItemCheckbox extends React.Component {
   }
 
   render () {
-    const { name, price, description, checked, disabled } = this.props;
+    const { name, checked, disabled } = this.props;
     return (
       <Grid
-        stackable
         verticalAlign='middle'
         container
         columns={2}
