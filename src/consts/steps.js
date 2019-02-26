@@ -22,11 +22,11 @@ export const stepsArray = [
   {
     key: 'review',
     title: "Review",
-    icon: 'send',
+    icon: 'search',
   },
   {
-    key: 'promote',
-    title: "Promote",
-    icon: 'angle double up',
+    key: 'submit',
+    title: "Submit",
+    icon: 'send',
   },
 ]

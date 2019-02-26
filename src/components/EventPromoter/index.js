@@ -17,8 +17,8 @@ class EventPromoter extends Component {
     return (
       <div>
         <Switch>
-          <Redirect exact path={match.path} to={joinPath(match, "promote/")} />
-          <Route path={joinPath(match, "promote/")} component={PromotePage} />
+          <Redirect exact path={match.path} to={joinPath(match, "submit/")} />
+          <Route path={joinPath(match, "submit/")} component={PromotePage} />
           <Route path={joinPath(match, "done/")} component={Done} />
         </Switch>
       </div>

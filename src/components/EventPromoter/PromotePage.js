@@ -9,14 +9,14 @@ import ImageUpload from './ImageUpload';
 const stepsArray = [
   {
     key: 'review',
-    icon: 'send',
+    icon: 'search',
     title: "Review",
     completed: true
   },
   {
-    key: 'promote',
-    icon: 'angle double up',
-    title: "Promote",
+    key: 'submit',
+    icon: 'send',
+    title: "Submit",
     active: true
   },
   {
@@ -133,17 +133,17 @@ class PromotePage extends Component {
     return (
       <div>
         <Step.Group items={stepsArray} attached='top' widths={stepsArray.length} unstackable/>
-        <Header as='h1'>Promote your event</Header>
+        <Header as='h1'>Submit your event</Header>
         {event && <Header as='h3'>{event.name}</Header>}
         { event && this.totalPricePreTax() === 0 &&
           <Message warning>
-            <p>Please click on <b>submit</b> even if you don't select a paid promotion, so we can have a record of your event. It's free to post!</p>
+            <p>Please click on <b>submit</b> even if you don't select Featured Event Listings, so we can have a record of your event. It's free to post!</p>
           </Message>
         }
         {
           event && promotions &&
           <Grid stackable celled='internally'>
-            <Grid.Column width={10}>
+            <Grid.Column>
               <Item.Group divided>
                 {
                   <Item>
@@ -181,11 +181,14 @@ class PromotePage extends Component {
                 </div>
               }
 
+                <Button onClick={this.submitEvent} loading={this.state.loading} primary>
+                  <Icon name='send' /> Submit free event
+                </Button>
 
             </Grid.Column>
 
 
-            <Grid.Column width={6}>
+            {/* <Grid.Column width={6}>
               <Header icon='cart' content="Cart" as='h2' />
               <List>
                 <List.Item>
@@ -247,7 +250,7 @@ class PromotePage extends Component {
                 </StripeCheckout>
               }
 
-            </Grid.Column>
+            </Grid.Column> */}
           </Grid>
         }
       </div>

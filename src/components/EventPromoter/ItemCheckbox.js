@@ -7,7 +7,7 @@ class ItemCheckbox extends React.Component {
   state = {
     hover: false
   }
-  
+
   toggleHoverOn = () => {
     this.setState({ hover: true })
   }
@@ -59,7 +59,7 @@ class ItemCheckbox extends React.Component {
                 {
                   parseFloat(price) > 0 ?
                     <span>${price}</span> :
-                    <span>FREE!</span>
+                    <span></span>
                 }
               </Item.Extra>
             </Item.Content>
